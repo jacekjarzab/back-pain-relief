@@ -1,23 +1,27 @@
 import React, { useState, useMemo } from 'react';
-import { 
-  IonContent, 
-  IonHeader, 
-  IonPage, 
-  IonTitle, 
+import {
+  IonContent,
+  IonHeader,
+  IonPage,
+  IonTitle,
   IonToolbar,
   IonButton,
   IonIcon,
   IonButtons,
   IonBackButton,
   IonChip,
+  IonSegment,
+  IonSegmentButton,
 } from '@ionic/react';
 import { useHistory } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  chevronBackOutline, 
-  chevronForwardOutline, 
+import {
+  chevronBackOutline,
+  chevronForwardOutline,
   checkmarkCircleOutline,
-  informationCircleOutline 
+  informationCircleOutline,
+  videocamOutline,
+  imageOutline,
 } from 'ionicons/icons';
 import { Haptics, ImpactStyle } from '@capacitor/haptics';
 
@@ -28,25 +32,26 @@ import './Workout.css';
 const Workout: React.FC = () => {
   const history = useHistory();
   const { todayRoutine, completeExercise, completeWorkout, preferences } = useApp();
-  
+
   const [currentIndex, setCurrentIndex] = useState(() => {
     // Start from first incomplete exercise
     const firstIncomplete = todayRoutine?.exercises.findIndex(e => !e.completed) ?? 0;
     return Math.max(0, firstIncomplete);
   });
+  const [viewMode, setViewMode] = useState<'image' | 'video'>('image');
 
   const currentExercise = todayRoutine?.exercises[currentIndex];
   const isLastExercise = currentIndex === (todayRoutine?.exercises.length ?? 0) - 1;
   const allCompleted = todayRoutine?.exercises.every(e => e.completed) ?? false;
 
-  const completedCount = useMemo(() => 
+  const completedCount = useMemo(() =>
     todayRoutine?.exercises.filter(e => e.completed).length ?? 0,
     [todayRoutine]
   );
 
   const handleComplete = async () => {
     if (!currentExercise) return;
-    
+
     // Haptic feedback
     if (preferences.hapticEnabled) {
       try {
@@ -55,9 +60,9 @@ const Workout: React.FC = () => {
         // Haptics not available on web
       }
     }
-    
+
     await completeExercise(currentExercise.exercise.id);
-    
+
     // Auto-advance if not last exercise
     if (!isLastExercise) {
       setTimeout(() => setCurrentIndex(prev => prev + 1), 500);
@@ -122,9 +127,53 @@ const Workout: React.FC = () => {
             exit={{ opacity: 0, x: -50 }}
             transition={{ duration: 0.3 }}
           >
-            {/* Exercise Image */}
+            {/* Exercise Media with Toggle */}
             <div className="exercise-image-hero">
-              <img src={exercise.imageUrl} alt={exercise.name} />
+              {exercise.videoUrl && (
+                <IonSegment
+                  value={viewMode}
+                  onIonChange={(e) => setViewMode(e.detail.value as 'image' | 'video')}
+                  className="workout-media-toggle"
+                >
+                  <IonSegmentButton value="image">
+                    <IonIcon icon={imageOutline} />
+                  </IonSegmentButton>
+                  <IonSegmentButton value="video">
+                    <IonIcon icon={videocamOutline} />
+                  </IonSegmentButton>
+                </IonSegment>
+              )}
+
+              <AnimatePresence mode="wait">
+                {viewMode === 'image' ? (
+                  <motion.div
+                    key="image"
+                    className="workout-media-image"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                  >
+                    <img src={exercise.imageUrl} alt={exercise.name} />
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="video"
+                    className="workout-media-video"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                  >
+                    <iframe
+                      src={exercise.videoUrl}
+                      title={`${exercise.name} video tutorial`}
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
               <div className="exercise-overlay">
                 <IonChip color="light" className="exercise-area-chip">
                   {exercise.bodyArea.replace('-', ' ')}
