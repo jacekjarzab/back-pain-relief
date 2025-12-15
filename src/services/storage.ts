@@ -1,10 +1,10 @@
 import { Storage } from '@ionic/storage';
-import { 
-  UserProgress, 
-  UserPreferences, 
-  DailyRoutine, 
-  defaultPreferences, 
-  defaultProgress 
+import {
+  UserProgress,
+  UserPreferences,
+  DailyRoutine,
+  defaultPreferences,
+  defaultProgress
 } from '../models/types';
 
 // Storage keys
@@ -20,7 +20,7 @@ class StorageService {
 
   async init(): Promise<Storage> {
     if (this.storage) return this.storage;
-    
+
     const storage = new Storage();
     this.storage = await storage.create();
     return this.storage;
@@ -88,6 +88,14 @@ class StorageService {
     const updated = [routine, ...history].slice(0, 30);
     const storage = await this.getStorage();
     await storage.set(KEYS.ROUTINES, updated);
+  }
+
+  // Clear progress and history (keeps preferences)
+  async clearProgressHistory(): Promise<void> {
+    const storage = await this.getStorage();
+    await storage.remove(KEYS.PROGRESS);
+    await storage.remove(KEYS.ROUTINES);
+    await storage.remove(KEYS.TODAY_ROUTINE);
   }
 
   // Clear all data

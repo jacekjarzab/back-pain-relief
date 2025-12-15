@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   IonContent,
   IonHeader,
@@ -19,6 +19,7 @@ import {
   IonButton,
   IonButtons,
   useIonToast,
+  useIonAlert,
 } from '@ionic/react';
 import {
   fitnessOutline,
@@ -29,6 +30,8 @@ import {
   refreshOutline,
   notificationsOutline,
   timeOutline,
+  trashOutline,
+  warningOutline,
 } from 'ionicons/icons';
 
 import { useApp } from '../../context/AppContext';
@@ -37,10 +40,11 @@ import { notificationService } from '../../services/notifications';
 import './Settings.css';
 
 const Settings: React.FC = () => {
-  const { preferences, updatePreferences, refreshRoutine } = useApp();
+  const { preferences, updatePreferences, refreshRoutine, resetProgress, progress } = useApp();
   const [showTimePicker, setShowTimePicker] = useState(false);
   const [tempTime, setTempTime] = useState(preferences.reminderTime || '09:00');
   const [presentToast] = useIonToast();
+  const [presentAlert] = useIonAlert();
 
   // Format time for display
   const formatTime = (time: string): string => {
@@ -101,6 +105,34 @@ const Settings: React.FC = () => {
         color: 'success',
       });
     }
+  };
+
+  // Handle delete progress confirmation
+  const handleDeleteProgress = () => {
+    presentAlert({
+      header: 'Delete Progress History',
+      subHeader: 'This action cannot be undone',
+      message: `Are you sure you want to delete all your progress? This will reset your ${progress.currentStreak}-day streak, ${progress.totalWorkoutsCompleted} completed workouts, and all history.`,
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        },
+        {
+          text: 'Delete',
+          role: 'destructive',
+          handler: async () => {
+            await resetProgress();
+            presentToast({
+              message: 'Progress history deleted',
+              duration: 2000,
+              color: 'warning',
+              icon: trashOutline,
+            });
+          },
+        },
+      ],
+    });
   };
 
   const handleDifficultyChange = (value: Difficulty) => {
@@ -263,6 +295,29 @@ const Settings: React.FC = () => {
             <IonIcon icon={refreshOutline} />
             <IonNote>
               Changing workout preferences will regenerate today's routine.
+            </IonNote>
+          </div>
+
+          {/* Data Management */}
+          <IonItemDivider className="settings-divider">
+            <IonLabel>Data Management</IonLabel>
+          </IonItemDivider>
+
+          <IonList className="settings-list">
+            <IonItem button onClick={handleDeleteProgress} className="delete-progress-item">
+              <IonIcon icon={trashOutline} slot="start" color="danger" />
+              <IonLabel>
+                <h2>Delete Progress History</h2>
+                <p>Reset streak, workouts, and all history</p>
+              </IonLabel>
+            </IonItem>
+          </IonList>
+
+          {/* Delete Warning Note */}
+          <div className="settings-warning">
+            <IonIcon icon={warningOutline} />
+            <IonNote>
+              Deleting your progress cannot be undone. Your preferences will be preserved.
             </IonNote>
           </div>
         </div>

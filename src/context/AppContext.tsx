@@ -23,6 +23,7 @@ interface AppContextType {
   completeWorkout: () => Promise<void>;
   updatePreferences: (prefs: Partial<UserPreferences>) => Promise<void>;
   refreshRoutine: () => Promise<void>;
+  resetProgress: () => Promise<void>;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -160,6 +161,16 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     await storageService.saveTodayRoutine(newRoutine);
   }, [preferences]);
 
+  // Reset all progress and history
+  const resetProgress = useCallback(async () => {
+    await storageService.clearProgressHistory();
+    setProgress(defaultProgress);
+    // Generate a fresh routine
+    const newRoutine = generateTodayRoutine(preferences);
+    setTodayRoutine(newRoutine);
+    await storageService.saveTodayRoutine(newRoutine);
+  }, [preferences]);
+
   return (
     <AppContext.Provider value={{
       progress,
@@ -170,6 +181,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       completeWorkout,
       updatePreferences,
       refreshRoutine,
+      resetProgress,
     }}>
       {children}
     </AppContext.Provider>
