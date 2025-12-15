@@ -1,22 +1,23 @@
 import React, { createContext, useContext, useEffect, useState, useCallback } from 'react';
 import dayjs from 'dayjs';
-import { 
-  UserProgress, 
-  UserPreferences, 
-  DailyRoutine, 
-  defaultPreferences, 
+import {
+  UserProgress,
+  UserPreferences,
+  DailyRoutine,
+  defaultPreferences,
   defaultProgress,
-  WorkoutExercise 
+  WorkoutExercise
 } from '../models/types';
 import { storageService } from '../services/storage';
 import { generateTodayRoutine, shouldRegenerateRoutine } from '../utils/routineGenerator';
+import { notificationService } from '../services/notifications';
 
 interface AppContextType {
   progress: UserProgress;
   preferences: UserPreferences;
   todayRoutine: DailyRoutine | null;
   isLoading: boolean;
-  
+
   // Actions
   completeExercise: (exerciseId: string) => Promise<void>;
   completeWorkout: () => Promise<void>;
@@ -37,16 +38,16 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     const initializeApp = async () => {
       try {
         await storageService.init();
-        
+
         const [savedProgress, savedPreferences, savedRoutine] = await Promise.all([
           storageService.getProgress(),
           storageService.getPreferences(),
           storageService.getTodayRoutine(),
         ]);
-        
+
         setProgress(savedProgress);
         setPreferences(savedPreferences);
-        
+
         // Check if we need a new routine for today
         if (shouldRegenerateRoutine(savedRoutine)) {
           const newRoutine = generateTodayRoutine(savedPreferences);
@@ -55,41 +56,52 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         } else {
           setTodayRoutine(savedRoutine);
         }
+
+        // Re-schedule notification if enabled (in case app was updated)
+        if (savedPreferences.reminderEnabled && savedPreferences.reminderTime) {
+          await notificationService.scheduleDailyReminder(savedPreferences.reminderTime);
+        }
+
+        // Set up notification click listener
+        notificationService.addListeners(() => {
+          // Navigate to workout when notification is tapped
+          window.location.href = '/workout';
+        });
       } catch (error) {
         console.error('Failed to initialize app:', error);
       } finally {
         setIsLoading(false);
       }
     };
-    
+
     initializeApp();
   }, []);
 
   // Complete a single exercise
   const completeExercise = useCallback(async (exerciseId: string) => {
     if (!todayRoutine) return;
-    
-    const updatedExercises: WorkoutExercise[] = todayRoutine.exercises.map(we => 
-      we.exercise.id === exerciseId 
+
+    const updatedExercises: WorkoutExercise[] = todayRoutine.exercises.map(we =>
+      we.exercise.id === exerciseId
         ? { ...we, completed: true, completedAt: new Date().toISOString() }
         : we
     );
-    
+
     const updatedRoutine: DailyRoutine = {
       ...todayRoutine,
       exercises: updatedExercises,
     };
-    
+
     setTodayRoutine(updatedRoutine);
     await storageService.saveTodayRoutine(updatedRoutine);
-    
+
     // Update progress
     const completedExercise = todayRoutine.exercises.find(we => we.exercise.id === exerciseId);
     if (completedExercise) {
       const updatedProgress: UserProgress = {
         ...progress,
         totalExercisesCompleted: progress.totalExercisesCompleted + 1,
-        totalMinutesExercised: progress.totalMinutesExercised + 
+        totalMinutesExercised: progress.totalMinutesExercised +
           Math.round(completedExercise.exercise.durationSeconds / 60),
       };
       setProgress(updatedProgress);
@@ -100,7 +112,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   // Complete entire workout
   const completeWorkout = useCallback(async () => {
     if (!todayRoutine) return;
-    
+
     const today = dayjs().format('YYYY-MM-DD');
     const completedRoutine: DailyRoutine = {
       ...todayRoutine,
@@ -112,15 +124,15 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         completedAt: we.completedAt || new Date().toISOString(),
       })),
     };
-    
+
     setTodayRoutine(completedRoutine);
     await storageService.saveTodayRoutine(completedRoutine);
     await storageService.addToRoutineHistory(completedRoutine);
-    
+
     // Calculate streak
     const isConsecutive = progress.lastWorkoutDate === dayjs().subtract(1, 'day').format('YYYY-MM-DD');
     const newStreak = isConsecutive ? progress.currentStreak + 1 : 1;
-    
+
     const updatedProgress: UserProgress = {
       ...progress,
       totalWorkoutsCompleted: progress.totalWorkoutsCompleted + 1,
@@ -129,7 +141,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       lastWorkoutDate: today,
       completedDates: [...new Set([...progress.completedDates, today])],
     };
-    
+
     setProgress(updatedProgress);
     await storageService.saveProgress(updatedProgress);
   }, [todayRoutine, progress]);

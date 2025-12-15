@@ -1,9 +1,9 @@
-import React from 'react';
-import { 
-  IonContent, 
-  IonHeader, 
-  IonPage, 
-  IonTitle, 
+import React, { useState, useEffect } from 'react';
+import {
+  IonContent,
+  IonHeader,
+  IonPage,
+  IonTitle,
   IonToolbar,
   IonList,
   IonItem,
@@ -14,22 +14,94 @@ import {
   IonIcon,
   IonItemDivider,
   IonNote,
+  IonDatetime,
+  IonModal,
+  IonButton,
+  IonButtons,
+  useIonToast,
 } from '@ionic/react';
-import { 
-  fitnessOutline, 
-  timerOutline, 
+import {
+  fitnessOutline,
+  timerOutline,
   bodyOutline,
   volumeHighOutline,
   phonePortraitOutline,
   refreshOutline,
+  notificationsOutline,
+  timeOutline,
 } from 'ionicons/icons';
 
 import { useApp } from '../../context/AppContext';
 import { Difficulty, BodyArea } from '../../models/types';
+import { notificationService } from '../../services/notifications';
 import './Settings.css';
 
 const Settings: React.FC = () => {
   const { preferences, updatePreferences, refreshRoutine } = useApp();
+  const [showTimePicker, setShowTimePicker] = useState(false);
+  const [tempTime, setTempTime] = useState(preferences.reminderTime || '09:00');
+  const [presentToast] = useIonToast();
+
+  // Format time for display
+  const formatTime = (time: string): string => {
+    const [hours, minutes] = time.split(':').map(Number);
+    const period = hours >= 12 ? 'PM' : 'AM';
+    const displayHours = hours % 12 || 12;
+    return `${displayHours}:${minutes.toString().padStart(2, '0')} ${period}`;
+  };
+
+  // Handle reminder toggle
+  const handleReminderToggle = async (enabled: boolean) => {
+    if (enabled) {
+      const hasPermission = await notificationService.requestPermission();
+      if (!hasPermission) {
+        presentToast({
+          message: 'Please enable notifications in your device settings',
+          duration: 3000,
+          color: 'warning',
+        });
+        return;
+      }
+
+      const time = preferences.reminderTime || '09:00';
+      await notificationService.scheduleDailyReminder(time);
+      await updatePreferences({ reminderEnabled: true, reminderTime: time });
+
+      presentToast({
+        message: `Daily reminder set for ${formatTime(time)}`,
+        duration: 2000,
+        color: 'success',
+      });
+    } else {
+      await notificationService.cancelDailyReminder();
+      await updatePreferences({ reminderEnabled: false });
+
+      presentToast({
+        message: 'Daily reminder disabled',
+        duration: 2000,
+        color: 'medium',
+      });
+    }
+  };
+
+  // Handle time selection
+  const handleTimeConfirm = async () => {
+    setShowTimePicker(false);
+
+    if (preferences.reminderEnabled) {
+      await notificationService.scheduleDailyReminder(tempTime);
+    }
+
+    await updatePreferences({ reminderTime: tempTime });
+
+    if (preferences.reminderEnabled) {
+      presentToast({
+        message: `Reminder updated to ${formatTime(tempTime)}`,
+        duration: 2000,
+        color: 'success',
+      });
+    }
+  };
 
   const handleDifficultyChange = (value: Difficulty) => {
     updatePreferences({ difficulty: value });
@@ -123,6 +195,38 @@ const Settings: React.FC = () => {
             </IonItem>
           </IonList>
 
+          {/* Notification Preferences */}
+          <IonItemDivider className="settings-divider">
+            <IonLabel>Reminders</IonLabel>
+          </IonItemDivider>
+
+          <IonList className="settings-list">
+            <IonItem>
+              <IonIcon icon={notificationsOutline} slot="start" color="primary" />
+              <IonLabel>
+                <h2>Daily Reminder</h2>
+                <p>Get notified to do your workout</p>
+              </IonLabel>
+              <IonToggle
+                checked={preferences.reminderEnabled}
+                onIonChange={(e) => handleReminderToggle(e.detail.checked)}
+              />
+            </IonItem>
+
+            {preferences.reminderEnabled && (
+              <IonItem button onClick={() => setShowTimePicker(true)}>
+                <IonIcon icon={timeOutline} slot="start" color="primary" />
+                <IonLabel>
+                  <h2>Reminder Time</h2>
+                  <p>When to remind you</p>
+                </IonLabel>
+                <IonNote slot="end" className="reminder-time">
+                  {formatTime(preferences.reminderTime || '09:00')}
+                </IonNote>
+              </IonItem>
+            )}
+          </IonList>
+
           {/* App Preferences */}
           <IonItemDivider className="settings-divider">
             <IonLabel>App Preferences</IonLabel>
@@ -162,6 +266,44 @@ const Settings: React.FC = () => {
             </IonNote>
           </div>
         </div>
+
+        {/* Time Picker Modal */}
+        <IonModal
+          isOpen={showTimePicker}
+          onDidDismiss={() => setShowTimePicker(false)}
+          className="time-picker-modal"
+        >
+          <IonHeader>
+            <IonToolbar>
+              <IonButtons slot="start">
+                <IonButton onClick={() => setShowTimePicker(false)}>Cancel</IonButton>
+              </IonButtons>
+              <IonTitle>Reminder Time</IonTitle>
+              <IonButtons slot="end">
+                <IonButton strong onClick={handleTimeConfirm}>Done</IonButton>
+              </IonButtons>
+            </IonToolbar>
+          </IonHeader>
+          <IonContent className="ion-padding">
+            <div className="time-picker-content">
+              <p className="time-picker-description">
+                Choose when you'd like to receive your daily workout reminder.
+              </p>
+              <IonDatetime
+                presentation="time"
+                value={`2024-01-01T${tempTime}:00`}
+                onIonChange={(e) => {
+                  const value = e.detail.value as string;
+                  if (value) {
+                    const time = value.split('T')[1]?.substring(0, 5) || tempTime;
+                    setTempTime(time);
+                  }
+                }}
+                className="reminder-datetime"
+              />
+            </div>
+          </IonContent>
+        </IonModal>
       </IonContent>
     </IonPage>
   );
