@@ -1,0 +1,183 @@
+import React, { useState, useMemo } from 'react';
+import { 
+  IonContent, 
+  IonHeader, 
+  IonPage, 
+  IonTitle, 
+  IonToolbar,
+  IonButton,
+  IonIcon,
+  IonButtons,
+  IonBackButton,
+  IonChip,
+} from '@ionic/react';
+import { useHistory } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
+import { 
+  chevronBackOutline, 
+  chevronForwardOutline, 
+  checkmarkCircleOutline,
+  informationCircleOutline 
+} from 'ionicons/icons';
+import { Haptics, ImpactStyle } from '@capacitor/haptics';
+
+import { useApp } from '../../context/AppContext';
+import WorkoutTimer from '../../components/WorkoutTimer';
+import './Workout.css';
+
+const Workout: React.FC = () => {
+  const history = useHistory();
+  const { todayRoutine, completeExercise, completeWorkout, preferences } = useApp();
+  
+  const [currentIndex, setCurrentIndex] = useState(() => {
+    // Start from first incomplete exercise
+    const firstIncomplete = todayRoutine?.exercises.findIndex(e => !e.completed) ?? 0;
+    return Math.max(0, firstIncomplete);
+  });
+
+  const currentExercise = todayRoutine?.exercises[currentIndex];
+  const isLastExercise = currentIndex === (todayRoutine?.exercises.length ?? 0) - 1;
+  const allCompleted = todayRoutine?.exercises.every(e => e.completed) ?? false;
+
+  const completedCount = useMemo(() => 
+    todayRoutine?.exercises.filter(e => e.completed).length ?? 0,
+    [todayRoutine]
+  );
+
+  const handleComplete = async () => {
+    if (!currentExercise) return;
+    
+    // Haptic feedback
+    if (preferences.hapticEnabled) {
+      try {
+        await Haptics.impact({ style: ImpactStyle.Medium });
+      } catch {
+        // Haptics not available on web
+      }
+    }
+    
+    await completeExercise(currentExercise.exercise.id);
+    
+    // Auto-advance if not last exercise
+    if (!isLastExercise) {
+      setTimeout(() => setCurrentIndex(prev => prev + 1), 500);
+    }
+  };
+
+  const handleFinishWorkout = async () => {
+    if (preferences.hapticEnabled) {
+      try {
+        await Haptics.impact({ style: ImpactStyle.Heavy });
+      } catch {
+        // Haptics not available
+      }
+    }
+    await completeWorkout();
+    history.push('/dashboard');
+  };
+
+  const handlePrevious = () => {
+    if (currentIndex > 0) setCurrentIndex(prev => prev - 1);
+  };
+
+  const handleNext = () => {
+    if (!isLastExercise) setCurrentIndex(prev => prev + 1);
+  };
+
+  if (!todayRoutine || !currentExercise) {
+    return (
+      <IonPage>
+        <IonContent className="workout-empty">
+          <p>No workout available</p>
+          <IonButton onClick={() => history.push('/dashboard')}>
+            Go to Dashboard
+          </IonButton>
+        </IonContent>
+      </IonPage>
+    );
+  }
+
+  const exercise = currentExercise.exercise;
+
+  return (
+    <IonPage>
+      <IonHeader className="ion-no-border">
+        <IonToolbar>
+          <IonButtons slot="start">
+            <IonBackButton defaultHref="/dashboard" icon={chevronBackOutline} text="" />
+          </IonButtons>
+          <IonTitle>
+            {currentIndex + 1} / {todayRoutine.exercises.length}
+          </IonTitle>
+        </IonToolbar>
+      </IonHeader>
+
+      <IonContent>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={exercise.id}
+            className="workout-content"
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -50 }}
+            transition={{ duration: 0.3 }}
+          >
+            {/* Exercise Image */}
+            <div className="exercise-image-hero">
+              <img src={exercise.imageUrl} alt={exercise.name} />
+              <div className="exercise-overlay">
+                <IonChip color="light" className="exercise-area-chip">
+                  {exercise.bodyArea.replace('-', ' ')}
+                </IonChip>
+              </div>
+            </div>
+
+            {/* Exercise Info */}
+            <div className="exercise-workout-info">
+              <h1 className="exercise-title">{exercise.name}</h1>
+              <p className="exercise-description">{exercise.description}</p>
+
+              {/* Timer */}
+              <WorkoutTimer
+                duration={exercise.durationSeconds}
+                exerciseName={exercise.name}
+                onComplete={handleComplete}
+              />
+
+              {/* Quick Tip */}
+              {exercise.proTips[0] && (
+                <div className="quick-tip">
+                  <IonIcon icon={informationCircleOutline} />
+                  <span>{exercise.proTips[0]}</span>
+                </div>
+              )}
+            </div>
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Navigation Footer */}
+        <div className="workout-navigation">
+          <IonButton fill="clear" onClick={handlePrevious} disabled={currentIndex === 0}>
+            <IonIcon slot="start" icon={chevronBackOutline} />
+            Previous
+          </IonButton>
+
+          {allCompleted || isLastExercise ? (
+            <IonButton color="success" onClick={handleFinishWorkout}>
+              <IonIcon slot="start" icon={checkmarkCircleOutline} />
+              Finish Workout
+            </IonButton>
+          ) : (
+            <IonButton fill="clear" onClick={handleNext}>
+              Next
+              <IonIcon slot="end" icon={chevronForwardOutline} />
+            </IonButton>
+          )}
+        </div>
+      </IonContent>
+    </IonPage>
+  );
+};
+
+export default Workout;
+

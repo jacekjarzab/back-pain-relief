@@ -1,0 +1,191 @@
+.exercise-not-found {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 16px;
+}
+
+.exercise-detail {
+  padding-bottom: 32px;
+}
+
+/* Media Container */
+.detail-media-container {
+  position: relative;
+}
+
+.media-toggle {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  width: auto;
+  --background: rgba(0, 0, 0, 0.6);
+  border-radius: 8px;
+}
+
+.media-toggle ion-segment-button {
+  --color: white;
+  --color-checked: var(--ion-color-primary);
+  --indicator-color: white;
+  min-width: 48px;
+  min-height: 36px;
+}
+
+.detail-image-container {
+  position: relative;
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+}
+
+.detail-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.detail-video-container {
+  position: relative;
+  width: 100%;
+  height: 250px;
+  background: #000;
+}
+
+.detail-video-container iframe {
+  width: 100%;
+  height: 100%;
+}
+
+.completed-badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  background: var(--ion-color-success);
+  color: white;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  z-index: 5;
+}
+
+.completed-badge ion-icon {
+  font-size: 18px;
+}
+
+.detail-header {
+  padding: 20px 16px;
+}
+
+.detail-header h1 {
+  margin: 0 0 8px 0;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--ion-text-color);
+}
+
+.detail-description {
+  margin: 0 0 16px 0;
+  font-size: 15px;
+  color: var(--ion-color-medium);
+  line-height: 1.5;
+}
+
+.detail-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.detail-chips ion-chip {
+  margin: 0;
+  text-transform: capitalize;
+}
+
+.detail-section {
+  padding: 0 16px 24px 16px;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.section-title ion-icon {
+  font-size: 20px;
+  color: var(--ion-color-primary);
+}
+
+.section-title h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--ion-text-color);
+}
+
+.instructions-list {
+  background: transparent;
+  padding: 0;
+}
+
+.instruction-item {
+  --padding-start: 0;
+  --inner-padding-end: 0;
+  margin-bottom: 8px;
+}
+
+.instruction-number {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--ion-color-primary);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 600;
+  margin-right: 12px;
+  flex-shrink: 0;
+}
+
+.tips-list {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.tips-list li {
+  margin-bottom: 8px;
+  color: var(--ion-text-color);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.benefits-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.benefit-chip {
+  margin: 0;
+  font-size: 13px;
+}
+
+.detail-actions {
+  padding: 16px;
+  position: sticky;
+  bottom: 0;
+  background: var(--ion-background-color);
+  border-top: 1px solid var(--ion-color-light-shade);
+}
+

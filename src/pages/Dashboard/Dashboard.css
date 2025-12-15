@@ -1,0 +1,107 @@
+.dashboard-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 16px;
+}
+
+.dashboard-loading p {
+  color: var(--ion-color-medium);
+}
+
+.dashboard-content {
+  padding-bottom: 32px;
+}
+
+/* Hero Section */
+.hero-section {
+  background: linear-gradient(135deg, 
+    rgba(var(--ion-color-primary-rgb), 0.1) 0%, 
+    rgba(var(--ion-color-primary-rgb), 0.05) 100%
+  );
+  border-radius: 24px;
+  padding: 24px;
+  margin-bottom: 16px;
+}
+
+.hero-stats {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 20px;
+}
+
+.progress-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.progress-count {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--ion-text-color);
+}
+
+.progress-label {
+  font-size: 12px;
+  color: var(--ion-color-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.hero-info {
+  flex: 1;
+}
+
+.hero-greeting {
+  margin: 0 0 4px 0;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--ion-text-color);
+}
+
+.hero-subtitle {
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  color: var(--ion-color-medium);
+}
+
+.start-workout-button {
+  --background: linear-gradient(135deg, var(--ion-color-primary) 0%, var(--ion-color-primary-shade) 100%);
+  --box-shadow: 0 4px 15px rgba(var(--ion-color-primary-rgb), 0.4);
+  height: 52px;
+  font-size: 16px;
+}
+
+/* Sections */
+.tip-section {
+  margin-bottom: 8px;
+}
+
+.exercises-section {
+  margin-top: 16px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  padding: 0 4px;
+}
+
+.section-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--ion-text-color);
+}
+
+.exercises-list {
+  display: flex;
+  flex-direction: column;
+}
+

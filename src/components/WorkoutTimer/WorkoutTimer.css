@@ -1,0 +1,76 @@
+.workout-timer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  padding: 20px;
+}
+
+.timer-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.timer-time {
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--ion-text-color);
+  font-variant-numeric: tabular-nums;
+}
+
+.timer-exercise-name {
+  font-size: 14px;
+  color: var(--ion-color-medium);
+  text-align: center;
+  max-width: 140px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.timer-completed {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--ion-color-success);
+}
+
+.timer-completed ion-icon {
+  font-size: 48px;
+}
+
+.timer-completed span {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.timer-controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.timer-controls ion-button {
+  --padding-start: 12px;
+  --padding-end: 12px;
+}
+
+.timer-controls ion-button ion-icon {
+  font-size: 24px;
+}
+
+.play-pause-button {
+  --padding-start: 20px;
+  --padding-end: 20px;
+  --border-radius: 50%;
+  width: 64px;
+  height: 64px;
+}
+
+.play-pause-button ion-icon {
+  font-size: 32px;
+}
+

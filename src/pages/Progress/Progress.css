@@ -1,0 +1,163 @@
+.progress-content {
+  padding-bottom: 32px;
+}
+
+/* Streak Section */
+.streak-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 16px;
+  background: linear-gradient(135deg, 
+    rgba(var(--ion-color-secondary-rgb), 0.1) 0%, 
+    rgba(var(--ion-color-danger-rgb), 0.05) 100%
+  );
+  border-radius: 24px;
+  margin-bottom: 20px;
+}
+
+.streak-section h3 {
+  margin: 0 0 16px 0;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--ion-color-medium);
+}
+
+/* Stats Grid */
+.stats-section {
+  margin-bottom: 24px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.stat-card {
+  margin: 0;
+  text-align: center;
+}
+
+.stat-card ion-card-content {
+  padding: 16px;
+}
+
+.stat-icon {
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.stat-icon.color-primary { color: var(--ion-color-primary); }
+.stat-icon.color-secondary { color: var(--ion-color-secondary); }
+.stat-icon.color-success { color: var(--ion-color-success); }
+.stat-icon.color-tertiary { color: var(--ion-color-tertiary); }
+
+.stat-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--ion-text-color);
+  margin-bottom: 4px;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: var(--ion-color-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Calendar Section */
+.calendar-section {
+  padding: 0 4px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  padding: 0 8px;
+}
+
+.section-header ion-icon {
+  font-size: 20px;
+  color: var(--ion-color-primary);
+}
+
+.section-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--ion-text-color);
+}
+
+.calendar {
+  background: var(--ion-card-background);
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: var(--app-card-shadow);
+}
+
+.calendar-header {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-bottom: 8px;
+}
+
+.calendar-day-name {
+  text-align: center;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ion-color-medium);
+  text-transform: uppercase;
+  padding: 4px 0;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.calendar-day {
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  font-size: 14px;
+  color: var(--ion-text-color);
+  position: relative;
+  transition: background 0.2s;
+}
+
+.calendar-day.other-month {
+  color: var(--ion-color-light-shade);
+}
+
+.calendar-day.today {
+  background: rgba(var(--ion-color-primary-rgb), 0.15);
+  font-weight: 700;
+}
+
+.calendar-day.completed {
+  background: var(--ion-color-success);
+  color: white;
+}
+
+.calendar-day.completed.today {
+  box-shadow: 0 0 0 2px var(--ion-color-primary);
+}
+
+.completed-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: white;
+  position: absolute;
+  bottom: 4px;
+}
+

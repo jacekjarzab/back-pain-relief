@@ -1,0 +1,68 @@
+.settings-content {
+  padding-bottom: 32px;
+}
+
+.settings-divider {
+  --background: transparent;
+  --padding-start: 0;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--ion-color-medium);
+  margin-top: 24px;
+  margin-bottom: 8px;
+}
+
+.settings-list {
+  background: transparent;
+}
+
+.settings-list ion-item {
+  --background: var(--ion-card-background);
+  --padding-start: 16px;
+  --padding-end: 16px;
+  margin-bottom: 8px;
+  border-radius: 12px;
+  --border-radius: 12px;
+}
+
+.settings-list ion-item ion-icon[slot="start"] {
+  font-size: 22px;
+  margin-right: 16px;
+}
+
+.settings-list ion-item h2 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 2px 0;
+}
+
+.settings-list ion-item p {
+  font-size: 13px;
+  color: var(--ion-color-medium);
+  margin: 0;
+}
+
+.settings-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 16px;
+  margin-top: 16px;
+  background: rgba(var(--ion-color-primary-rgb), 0.08);
+  border-radius: 12px;
+}
+
+.settings-note ion-icon {
+  font-size: 18px;
+  color: var(--ion-color-primary);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.settings-note ion-note {
+  font-size: 13px;
+  color: var(--ion-color-medium);
+  line-height: 1.4;
+}
+
