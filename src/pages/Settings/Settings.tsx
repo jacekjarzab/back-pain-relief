@@ -326,6 +326,8 @@ const Settings: React.FC = () => {
         <IonModal
           isOpen={showTimePicker}
           onDidDismiss={() => setShowTimePicker(false)}
+          initialBreakpoint={0.5}
+          breakpoints={[0, 0.5]}
           className="time-picker-modal"
         >
           <IonHeader>
