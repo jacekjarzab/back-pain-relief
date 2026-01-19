@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { IonIcon } from '@ionic/react';
 import { flameOutline, flame } from 'ionicons/icons';
+import { useTranslation } from 'react-i18next';
 import './StreakBadge.css';
 
 interface StreakBadgeProps {
@@ -17,13 +18,14 @@ const StreakBadge: React.FC<StreakBadgeProps> = ({
   showLabel = true,
   animated = true,
 }) => {
+  const { t } = useTranslation();
   const isActive = streak > 0;
 
   const Wrapper = animated ? motion.div : 'div';
   const wrapperProps = animated ? {
     initial: { scale: 0.8, opacity: 0 },
     animate: { scale: 1, opacity: 1 },
-    transition: { type: 'spring', stiffness: 300 }
+    transition: { type: 'spring' as const, stiffness: 300 }
   } : {};
 
   return (
@@ -50,7 +52,7 @@ const StreakBadge: React.FC<StreakBadgeProps> = ({
         <span className="streak-count">{streak}</span>
         {showLabel && (
           <span className="streak-label">
-            {streak === 1 ? 'day' : 'days'}
+            {t('home.days')}
           </span>
         )}
       </div>

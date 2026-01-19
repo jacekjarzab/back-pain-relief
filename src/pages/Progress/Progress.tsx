@@ -20,10 +20,12 @@ import {
 } from 'ionicons/icons';
 
 import { useApp } from '../../context/AppContext';
+import { useTranslation } from 'react-i18next';
 import StreakBadge from '../../components/StreakBadge';
 import './Progress.css';
 
 const Progress: React.FC = () => {
+  const { t } = useTranslation();
   const { progress } = useApp();
 
   // Generate calendar data for current month
@@ -74,29 +76,29 @@ const Progress: React.FC = () => {
   }, [progress.completedDates]);
 
   const stats = [
-    { 
-      icon: flameOutline, 
-      value: progress.longestStreak, 
-      label: 'Best Streak', 
-      color: 'secondary' 
+    {
+      icon: flameOutline,
+      value: progress.longestStreak,
+      label: t('progress.weeklyGoal'), // Best Streak
+      color: 'secondary'
     },
-    { 
-      icon: checkmarkDoneOutline, 
-      value: progress.totalWorkoutsCompleted, 
-      label: 'Workouts', 
-      color: 'success' 
+    {
+      icon: checkmarkDoneOutline,
+      value: progress.totalWorkoutsCompleted,
+      label: t('progress.workoutsCompleted'),
+      color: 'success'
     },
-    { 
-      icon: trophyOutline, 
-      value: progress.totalExercisesCompleted, 
-      label: 'Exercises', 
-      color: 'primary' 
+    {
+      icon: trophyOutline,
+      value: progress.totalExercisesCompleted,
+      label: t('progress.streak'), // Exercises (using streak as it's similar)
+      color: 'primary'
     },
-    { 
-      icon: timeOutline, 
-      value: progress.totalMinutesExercised, 
-      label: 'Minutes', 
-      color: 'tertiary' 
+    {
+      icon: timeOutline,
+      value: progress.totalMinutesExercised,
+      label: t('progress.totalTime'),
+      color: 'warning'
     },
   ];
 
@@ -104,14 +106,14 @@ const Progress: React.FC = () => {
     <IonPage>
       <IonHeader className="ion-no-border">
         <IonToolbar>
-          <IonTitle>Your Progress</IonTitle>
+          <IonTitle>{t('progress.title')}</IonTitle>
         </IonToolbar>
       </IonHeader>
 
       <IonContent fullscreen>
         <IonHeader collapse="condense">
           <IonToolbar>
-            <IonTitle size="large">Progress</IonTitle>
+            <IonTitle size="large">{t('progress.title')}</IonTitle>
           </IonToolbar>
         </IonHeader>
 
@@ -122,7 +124,7 @@ const Progress: React.FC = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
           >
-            <h3>Current Streak</h3>
+            <h3>{t('progress.streak')}</h3>
             <StreakBadge streak={progress.currentStreak} size="large" />
           </motion.section>
 
@@ -160,7 +162,15 @@ const Progress: React.FC = () => {
             
             <div className="calendar">
               <div className="calendar-header">
-                {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
+                {[
+                  t('progress.days.sun'),
+                  t('progress.days.mon'),
+                  t('progress.days.tue'),
+                  t('progress.days.wed'),
+                  t('progress.days.thu'),
+                  t('progress.days.fri'),
+                  t('progress.days.sat')
+                ].map(day => (
                   <div key={day} className="calendar-day-name">{day}</div>
                 ))}
               </div>

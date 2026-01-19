@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useState, useCallback } from 'react';
 import dayjs from 'dayjs';
+import i18n from 'i18next';
 import {
   UserProgress,
   UserPreferences,
@@ -48,6 +49,11 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
         setProgress(savedProgress);
         setPreferences(savedPreferences);
+
+        // Initialize language
+        if (savedPreferences.language) {
+          await i18n.changeLanguage(savedPreferences.language);
+        }
 
         // Check if we need a new routine for today
         if (shouldRegenerateRoutine(savedRoutine)) {
@@ -152,6 +158,11 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     const updated = { ...preferences, ...updates };
     setPreferences(updated);
     await storageService.savePreferences(updated);
+
+    // Handle language change
+    if (updates.language && updates.language !== preferences.language) {
+      await i18n.changeLanguage(updates.language);
+    }
   }, [preferences]);
 
   // Refresh/regenerate routine

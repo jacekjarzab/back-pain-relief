@@ -16,6 +16,7 @@ import { playCircleOutline, refreshOutline } from 'ionicons/icons';
 
 import { useApp } from '../../context/AppContext';
 import { getRandomProTip } from '../../data/exercises';
+import { useTranslation } from 'react-i18next';
 import ProgressRing from '../../components/ProgressRing';
 import StreakBadge from '../../components/StreakBadge';
 import ExerciseCard from '../../components/ExerciseCard';
@@ -25,6 +26,7 @@ import './Dashboard.css';
 
 const Dashboard: React.FC = () => {
   const history = useHistory();
+  const { t } = useTranslation();
   const { todayRoutine, progress, isLoading, refreshRoutine, completeExercise } = useApp();
 
   const dailyTip = useMemo(() => getRandomProTip(), []);
@@ -44,7 +46,7 @@ const Dashboard: React.FC = () => {
       <IonPage>
         <IonContent className="dashboard-loading">
           <IonSpinner name="crescent" />
-          <p>Preparing your workout...</p>
+          <p>{t('common.loading')}</p>
         </IonContent>
       </IonPage>
     );
@@ -54,7 +56,7 @@ const Dashboard: React.FC = () => {
     <IonPage>
       <IonHeader className="ion-no-border">
         <IonToolbar>
-          <IonTitle>Back Pain Relief</IonTitle>
+          <IonTitle>{t('home.welcome')}</IonTitle>
         </IonToolbar>
       </IonHeader>
 
@@ -81,24 +83,24 @@ const Dashboard: React.FC = () => {
                 strokeWidth={10}
                 color={isWorkoutComplete ? 'var(--ion-color-success)' : 'var(--ion-color-primary)'}
               >
-                <div className="progress-inner">
-                  <span className="progress-count">{completedCount}/{totalCount}</span>
-                  <span className="progress-label">exercises</span>
-                </div>
+                 <div className="progress-inner">
+                   <span className="progress-count">{completedCount}/{totalCount}</span>
+                   <span className="progress-label">{t('workout.exercise').toLowerCase()}s</span>
+                 </div>
               </ProgressRing>
 
-              <div className="hero-info">
-                <h2 className="hero-greeting">
-                  {isWorkoutComplete ? "Great job! 🎉" : "Today's Workout"}
-                </h2>
-                <p className="hero-subtitle">
-                  {isWorkoutComplete 
-                    ? "You completed today's routine!"
-                    : `${formatDuration(todayRoutine?.totalDuration ?? 0)} • ${totalCount} exercises`
-                  }
-                </p>
-                <StreakBadge streak={progress.currentStreak} size="small" />
-              </div>
+               <div className="hero-info">
+                 <h2 className="hero-greeting">
+                   {isWorkoutComplete ? t('workout.workoutComplete') : t('home.todayRoutine')}
+                 </h2>
+                 <p className="hero-subtitle">
+                   {isWorkoutComplete
+                     ? t('workout.greatJob')
+                     : `${formatDuration(todayRoutine?.totalDuration ?? 0)} • ${totalCount} ${t('workout.exercise').toLowerCase()}s`
+                   }
+                 </p>
+                 <StreakBadge streak={progress.currentStreak} size="small" />
+               </div>
             </div>
 
             {!isWorkoutComplete && (
@@ -108,7 +110,7 @@ const Dashboard: React.FC = () => {
                 onClick={() => history.push('/workout')}
               >
                 <IonIcon slot="start" icon={playCircleOutline} />
-                {completedCount > 0 ? 'Continue Workout' : 'Start Workout'}
+                {completedCount > 0 ? t('workout.nextExercise') : t('home.startWorkout')}
               </IonButton>
             )}
           </motion.section>
@@ -120,12 +122,12 @@ const Dashboard: React.FC = () => {
 
           {/* Exercise Preview */}
           <section className="exercises-section">
-            <div className="section-header">
-              <h3>Today's Exercises</h3>
-              <IonButton fill="clear" size="small" onClick={refreshRoutine}>
-                <IonIcon slot="icon-only" icon={refreshOutline} />
-              </IonButton>
-            </div>
+             <div className="section-header">
+               <h3>{t('home.todayRoutine')}</h3>
+               <IonButton fill="clear" size="small" onClick={refreshRoutine}>
+                 <IonIcon slot="icon-only" icon={refreshOutline} />
+               </IonButton>
+             </div>
 
             <div className="exercises-list">
               {todayRoutine?.exercises.map((we, index) => (

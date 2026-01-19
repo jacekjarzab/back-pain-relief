@@ -32,15 +32,18 @@ import {
   timeOutline,
   trashOutline,
   warningOutline,
+  settingsOutline,
 } from 'ionicons/icons';
 
 import { useApp } from '../../context/AppContext';
 import { Difficulty, BodyArea } from '../../models/types';
 import { notificationService } from '../../services/notifications';
+import { useTranslation } from 'react-i18next';
 import './Settings.css';
 
 const Settings: React.FC = () => {
   const { preferences, updatePreferences, refreshRoutine, resetProgress, progress } = useApp();
+  const { t } = useTranslation();
   const [showTimePicker, setShowTimePicker] = useState(false);
   const [tempTime, setTempTime] = useState(preferences.reminderTime || '09:00');
   const [presentToast] = useIonToast();
@@ -60,7 +63,7 @@ const Settings: React.FC = () => {
       const hasPermission = await notificationService.requestPermission();
       if (!hasPermission) {
         presentToast({
-          message: 'Please enable notifications in your device settings',
+          message: t('settings.enableNotifications'),
           duration: 3000,
           color: 'warning',
         });
@@ -72,7 +75,7 @@ const Settings: React.FC = () => {
       await updatePreferences({ reminderEnabled: true, reminderTime: time });
 
       presentToast({
-        message: `Daily reminder set for ${formatTime(time)}`,
+        message: t('settings.reminderSet', { time: formatTime(time) }),
         duration: 2000,
         color: 'success',
       });
@@ -81,7 +84,7 @@ const Settings: React.FC = () => {
       await updatePreferences({ reminderEnabled: false });
 
       presentToast({
-        message: 'Daily reminder disabled',
+        message: t('settings.reminderDisabled'),
         duration: 2000,
         color: 'medium',
       });
@@ -100,7 +103,7 @@ const Settings: React.FC = () => {
 
     if (preferences.reminderEnabled) {
       presentToast({
-        message: `Reminder updated to ${formatTime(tempTime)}`,
+        message: t('settings.reminderUpdated', { time: formatTime(tempTime) }),
         duration: 2000,
         color: 'success',
       });
@@ -110,21 +113,24 @@ const Settings: React.FC = () => {
   // Handle delete progress confirmation
   const handleDeleteProgress = () => {
     presentAlert({
-      header: 'Delete Progress History',
-      subHeader: 'This action cannot be undone',
-      message: `Are you sure you want to delete all your progress? This will reset your ${progress.currentStreak}-day streak, ${progress.totalWorkoutsCompleted} completed workouts, and all history.`,
+      header: t('settings.deleteProgressHeader'),
+      subHeader: t('settings.deleteProgressSubHeader'),
+      message: t('settings.deleteProgressMessage', {
+        streak: progress.currentStreak,
+        workouts: progress.totalWorkoutsCompleted
+      }),
       buttons: [
         {
-          text: 'Cancel',
+          text: t('common.cancel'),
           role: 'cancel',
         },
         {
-          text: 'Delete',
+          text: t('settings.delete'),
           role: 'destructive',
           handler: async () => {
             await resetProgress();
             presentToast({
-              message: 'Progress history deleted',
+              message: t('settings.progressDeleted'),
               duration: 2000,
               color: 'warning',
               icon: trashOutline,
@@ -154,65 +160,65 @@ const Settings: React.FC = () => {
 
   return (
     <IonPage>
-      <IonHeader className="ion-no-border">
-        <IonToolbar>
-          <IonTitle>Settings</IonTitle>
-        </IonToolbar>
-      </IonHeader>
+        <IonHeader className="ion-no-border">
+          <IonToolbar>
+            <IonTitle>{t('settings.title')}</IonTitle>
+          </IonToolbar>
+        </IonHeader>
 
       <IonContent fullscreen>
         <IonHeader collapse="condense">
           <IonToolbar>
-            <IonTitle size="large">Settings</IonTitle>
+            <IonTitle size="large">{t('settings.title')}</IonTitle>
           </IonToolbar>
         </IonHeader>
 
         <div className="settings-content">
           {/* Workout Preferences */}
           <IonItemDivider className="settings-divider">
-            <IonLabel>Workout Preferences</IonLabel>
+            <IonLabel>{t('settings.workoutPreferences')}</IonLabel>
           </IonItemDivider>
 
           <IonList className="settings-list">
             <IonItem>
               <IonIcon icon={fitnessOutline} slot="start" color="primary" />
               <IonLabel>
-                <h2>Difficulty Level</h2>
-                <p>Adjust to your fitness level</p>
+                <h2>{t('settings.difficultyLevel')}</h2>
+                <p>{t('settings.difficultyDescription')}</p>
               </IonLabel>
               <IonSelect
                 value={preferences.difficulty}
                 onIonChange={(e) => handleDifficultyChange(e.detail.value)}
                 interface="action-sheet"
               >
-                <IonSelectOption value="beginner">Beginner</IonSelectOption>
-                <IonSelectOption value="intermediate">Intermediate</IonSelectOption>
-                <IonSelectOption value="advanced">Advanced</IonSelectOption>
+                <IonSelectOption value="beginner">{t('settings.beginner')}</IonSelectOption>
+                <IonSelectOption value="intermediate">{t('settings.intermediate')}</IonSelectOption>
+                <IonSelectOption value="advanced">{t('settings.advanced')}</IonSelectOption>
               </IonSelect>
             </IonItem>
 
             <IonItem>
               <IonIcon icon={timerOutline} slot="start" color="primary" />
               <IonLabel>
-                <h2>Workout Duration</h2>
-                <p>How long is each session</p>
+                <h2>{t('settings.workoutDuration')}</h2>
+                <p>{t('settings.durationDescription')}</p>
               </IonLabel>
               <IonSelect
                 value={preferences.workoutDuration}
                 onIonChange={(e) => handleDurationChange(e.detail.value)}
                 interface="action-sheet"
               >
-                <IonSelectOption value="short">Short (~10 min)</IonSelectOption>
-                <IonSelectOption value="medium">Medium (~15 min)</IonSelectOption>
-                <IonSelectOption value="long">Long (~20 min)</IonSelectOption>
+                <IonSelectOption value="short">{t('settings.short')}</IonSelectOption>
+                <IonSelectOption value="medium">{t('settings.medium')}</IonSelectOption>
+                <IonSelectOption value="long">{t('settings.long')}</IonSelectOption>
               </IonSelect>
             </IonItem>
 
             <IonItem>
               <IonIcon icon={bodyOutline} slot="start" color="primary" />
               <IonLabel>
-                <h2>Focus Areas</h2>
-                <p>Which areas to target</p>
+                <h2>{t('settings.focusAreas')}</h2>
+                <p>{t('settings.focusAreasDescription')}</p>
               </IonLabel>
               <IonSelect
                 value={preferences.focusAreas}
@@ -220,24 +226,24 @@ const Settings: React.FC = () => {
                 multiple
                 interface="alert"
               >
-                <IonSelectOption value="upper-back">Upper Back</IonSelectOption>
-                <IonSelectOption value="lower-back">Lower Back</IonSelectOption>
-                <IonSelectOption value="core">Core</IonSelectOption>
+                <IonSelectOption value="upper-back">{t('settings.upperBack')}</IonSelectOption>
+                <IonSelectOption value="lower-back">{t('settings.lowerBack')}</IonSelectOption>
+                <IonSelectOption value="core">{t('settings.core')}</IonSelectOption>
               </IonSelect>
             </IonItem>
           </IonList>
 
           {/* Notification Preferences */}
           <IonItemDivider className="settings-divider">
-            <IonLabel>Reminders</IonLabel>
+            <IonLabel>{t('settings.reminders')}</IonLabel>
           </IonItemDivider>
 
           <IonList className="settings-list">
             <IonItem>
               <IonIcon icon={notificationsOutline} slot="start" color="primary" />
               <IonLabel>
-                <h2>Daily Reminder</h2>
-                <p>Get notified to do your workout</p>
+                <h2>{t('settings.dailyReminder')}</h2>
+                <p>{t('settings.reminderDescription')}</p>
               </IonLabel>
               <IonToggle
                 checked={preferences.reminderEnabled}
@@ -249,8 +255,8 @@ const Settings: React.FC = () => {
               <IonItem button onClick={() => setShowTimePicker(true)}>
                 <IonIcon icon={timeOutline} slot="start" color="primary" />
                 <IonLabel>
-                  <h2>Reminder Time</h2>
-                  <p>When to remind you</p>
+                  <h2>{t('settings.reminderTime')}</h2>
+                  <p>{t('settings.reminderTimeDescription')}</p>
                 </IonLabel>
                 <IonNote slot="end" className="reminder-time">
                   {formatTime(preferences.reminderTime || '09:00')}
@@ -261,15 +267,15 @@ const Settings: React.FC = () => {
 
           {/* App Preferences */}
           <IonItemDivider className="settings-divider">
-            <IonLabel>App Preferences</IonLabel>
+            <IonLabel>{t('settings.appPreferences')}</IonLabel>
           </IonItemDivider>
 
           <IonList className="settings-list">
             <IonItem>
               <IonIcon icon={volumeHighOutline} slot="start" color="primary" />
               <IonLabel>
-                <h2>Sound Effects</h2>
-                <p>Play sounds during workout</p>
+                <h2>{t('settings.soundEffects')}</h2>
+                <p>{t('settings.soundDescription')}</p>
               </IonLabel>
               <IonToggle
                 checked={preferences.soundEnabled}
@@ -280,13 +286,29 @@ const Settings: React.FC = () => {
             <IonItem>
               <IonIcon icon={phonePortraitOutline} slot="start" color="primary" />
               <IonLabel>
-                <h2>Haptic Feedback</h2>
-                <p>Vibrate on actions</p>
+                <h2>{t('settings.hapticFeedback')}</h2>
+                <p>{t('settings.hapticDescription')}</p>
               </IonLabel>
               <IonToggle
                 checked={preferences.hapticEnabled}
                 onIonChange={(e) => updatePreferences({ hapticEnabled: e.detail.checked })}
               />
+            </IonItem>
+
+            <IonItem>
+              <IonIcon icon={settingsOutline} slot="start" color="primary" />
+              <IonLabel>
+                <h2>{t('settings.language')}</h2>
+                <p>{t('settings.languageDescription')}</p>
+              </IonLabel>
+              <IonSelect
+                value={preferences.language}
+                onIonChange={(e) => updatePreferences({ language: e.detail.value })}
+                interface="action-sheet"
+              >
+                <IonSelectOption value="en">{t('settings.english')}</IonSelectOption>
+                <IonSelectOption value="pl">{t('settings.polish')}</IonSelectOption>
+              </IonSelect>
             </IonItem>
           </IonList>
 
@@ -294,21 +316,21 @@ const Settings: React.FC = () => {
           <div className="settings-note">
             <IonIcon icon={refreshOutline} />
             <IonNote>
-              Changing workout preferences will regenerate today's routine.
+              {t('settings.regenerateNote')}
             </IonNote>
           </div>
 
           {/* Data Management */}
           <IonItemDivider className="settings-divider">
-            <IonLabel>Data Management</IonLabel>
+            <IonLabel>{t('settings.dataManagement')}</IonLabel>
           </IonItemDivider>
 
           <IonList className="settings-list">
             <IonItem button onClick={handleDeleteProgress} className="delete-progress-item">
               <IonIcon icon={trashOutline} slot="start" color="danger" />
               <IonLabel>
-                <h2>Delete Progress History</h2>
-                <p>Reset streak, workouts, and all history</p>
+                <h2>{t('settings.deleteProgressHistory')}</h2>
+                <p>{t('settings.deleteProgressDescription')}</p>
               </IonLabel>
             </IonItem>
           </IonList>
@@ -317,7 +339,7 @@ const Settings: React.FC = () => {
           <div className="settings-warning">
             <IonIcon icon={warningOutline} />
             <IonNote>
-              Deleting your progress cannot be undone. Your preferences will be preserved.
+              {t('settings.deleteProgressWarning')}
             </IonNote>
           </div>
         </div>
@@ -333,19 +355,19 @@ const Settings: React.FC = () => {
           <IonHeader>
             <IonToolbar>
               <IonButtons slot="start">
-                <IonButton onClick={() => setShowTimePicker(false)}>Cancel</IonButton>
+                <IonButton onClick={() => setShowTimePicker(false)}>{t('common.cancel')}</IonButton>
               </IonButtons>
-              <IonTitle>Reminder Time</IonTitle>
+              <IonTitle>{t('settings.reminderTimeTitle')}</IonTitle>
               <IonButtons slot="end">
-                <IonButton strong onClick={handleTimeConfirm}>Done</IonButton>
+                <IonButton strong onClick={handleTimeConfirm}>{t('common.confirm')}</IonButton>
               </IonButtons>
             </IonToolbar>
           </IonHeader>
-          <IonContent className="ion-padding">
-            <div className="time-picker-content">
-              <p className="time-picker-description">
-                Choose when you'd like to receive your daily workout reminder.
-              </p>
+            <IonContent className="ion-padding">
+              <div className="time-picker-content">
+                <p className="time-picker-description">
+                  {t('settings.reminderTimeDescription')}
+                </p>
               <IonDatetime
                 presentation="time"
                 value={`2024-01-01T${tempTime}:00`}

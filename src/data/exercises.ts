@@ -96,7 +96,7 @@ export const exercises: Exercise[] = [
     benefits: ['Releases shoulder tension', 'Stretches thoracic spine', 'Improves rotation']
   },
   {
-    id: 'shoulder-blade-squeeze',
+    id: 'shoulder-squeeze',
     name: 'Shoulder Blade Squeeze',
     description: 'Strengthens the muscles between your shoulder blades to improve posture.',
     bodyArea: 'upper-back',
@@ -407,7 +407,7 @@ export const exercises: Exercise[] = [
     benefits: ['Strengthens obliques', 'Improves lateral stability', 'Balances core strength']
   },
   {
-    id: 'ab-crunch',
+    id: 'crunch',
     name: 'Modified Crunch',
     description: 'A controlled crunch that targets the upper abdominals safely.',
     bodyArea: 'core',

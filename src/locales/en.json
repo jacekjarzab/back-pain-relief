@@ -1,0 +1,490 @@
+{
+  "common": {
+    "settings": "Settings",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "confirm": "Confirm",
+    "yes": "Yes",
+    "no": "No",
+    "ok": "OK",
+    "close": "Close",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "warning": "Warning",
+    "info": "Information"
+  },
+  "navigation": {
+    "home": "Home",
+    "workout": "Workout",
+    "progress": "Progress",
+    "settings": "Settings"
+  },
+  "settings": {
+    "title": "Settings",
+    "workoutPreferences": "Workout Preferences",
+    "difficultyLevel": "Difficulty Level",
+    "difficultyDescription": "Adjust to your fitness level",
+    "beginner": "Beginner",
+    "intermediate": "Intermediate",
+    "advanced": "Advanced",
+    "workoutDuration": "Workout Duration",
+    "durationDescription": "How long is each session",
+    "short": "Short (~10 min)",
+    "medium": "Medium (~15 min)",
+    "long": "Long (~20 min)",
+    "focusAreas": "Focus Areas",
+    "focusAreasDescription": "Which areas to target",
+    "upperBack": "Upper Back",
+    "lowerBack": "Lower Back",
+    "core": "Core",
+    "reminders": "Reminders",
+    "dailyReminder": "Daily Reminder",
+    "reminderDescription": "Get notified to do your workout",
+    "reminderTime": "Reminder Time",
+    "reminderTimeDescription": "Choose when you'd like to receive your daily workout reminder.",
+    "appPreferences": "App Preferences",
+    "soundEffects": "Sound Effects",
+    "soundDescription": "Play sounds during workout",
+    "hapticFeedback": "Haptic Feedback",
+    "hapticDescription": "Vibrate on actions",
+    "language": "Language",
+    "languageDescription": "Choose your preferred language",
+    "english": "English",
+    "polish": "Polski",
+    "dataManagement": "Data Management",
+    "deleteProgressHistory": "Delete Progress History",
+    "deleteProgressDescription": "Reset streak, workouts, and all history",
+    "deleteProgressWarning": "Deleting your progress cannot be undone. Your preferences will be preserved.",
+    "regenerateNote": "Changing workout preferences will regenerate today's routine.",
+    "deleteProgressHeader": "Delete Progress History",
+    "deleteProgressSubHeader": "This action cannot be undone",
+    "deleteProgressMessage": "Are you sure you want to delete all your progress? This will reset your {{streak}}-day streak, {{workouts}} completed workouts, and all history.",
+    "progressDeleted": "Progress history deleted",
+    "reminderSet": "Daily reminder set for {{time}}",
+    "reminderDisabled": "Daily reminder disabled",
+    "reminderUpdated": "Reminder updated to {{time}}",
+    "enableNotifications": "Please enable notifications in your device settings",
+    "reminderTimeTitle": "Reminder Time"
+  },
+  "home": {
+    "welcome": "Welcome to Back Pain Relief",
+    "startWorkout": "Start Workout",
+    "viewProgress": "View Progress",
+    "currentStreak": "Current Streak",
+    "days": "days",
+    "totalWorkouts": "Total Workouts",
+    "todayRoutine": "Today's Routine",
+    "noRoutine": "No routine generated yet",
+    "generateRoutine": "Generate Routine"
+  },
+  "workout": {
+    "title": "Workout",
+    "exercise": "Exercise",
+    "of": "of",
+    "complete": "Complete",
+    "completed": "Completed",
+    "rest": "Rest",
+    "seconds": "seconds",
+    "nextExercise": "Next Exercise",
+    "finishWorkout": "Finish Workout",
+    "workoutComplete": "Workout Complete!",
+    "greatJob": "Great job! You've completed your workout.",
+    "viewResults": "View Results",
+    "startOver": "Start Over",
+    "image": "Image",
+    "video": "Video"
+  },
+  "progress": {
+    "title": "Progress",
+    "streak": "Streak",
+    "workoutsCompleted": "Workouts Completed",
+    "totalTime": "Total Time",
+    "minutes": "minutes",
+    "weeklyGoal": "Weekly Goal",
+    "achieved": "Achieved",
+    "currentWeek": "Current Week",
+    "last7Days": "Last 7 Days",
+    "monthlyStats": "Monthly Stats",
+    "resetProgress": "Reset Progress",
+    "days": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat"
+    }
+  },
+  "exercises": {
+    "instructions": "Instructions",
+    "proTips": "Pro Tips",
+    "benefits": "Benefits",
+    "difficulty": {
+      "beginner": "Beginner",
+      "intermediate": "Intermediate",
+      "advanced": "Advanced"
+    },
+    "bodyArea": {
+      "upper-back": "Upper Back",
+      "lower-back": "Lower Back",
+      "core": "Core",
+      "full-back": "Full Back"
+    },
+    "catCow": {
+      "name": "Cat-Cow Stretch",
+      "description": "A gentle flow between two poses that warms up the spine and relieves tension.",
+      "instructions": [
+        "Start on hands and knees in a tabletop position",
+        "Inhale: Drop belly, lift head and tailbone (Cow)",
+        "Exhale: Round spine, tuck chin to chest (Cat)",
+        "Flow smoothly between positions",
+        "Match movement to breath"
+      ],
+      "proTips": [
+        "Keep movements slow and controlled",
+        "Focus on feeling each vertebra move",
+        "Great as a morning wake-up stretch"
+      ],
+      "benefits": [
+        "Improves spine flexibility",
+        "Reduces back tension",
+        "Promotes relaxation"
+      ]
+    },
+    "threadNeedle": {
+      "name": "Thread the Needle",
+      "description": "A rotational stretch that opens up the upper back and shoulders.",
+      "instructions": [
+        "Start in tabletop position",
+        "Slide right arm under body, palm up",
+        "Rest right shoulder and temple on floor",
+        "Hold and breathe deeply",
+        "Return and repeat on left side"
+      ],
+      "proTips": [
+        "Keep hips level and stacked over knees",
+        "Use top hand for support or reach overhead",
+        "Breathe into the stretch"
+      ],
+      "benefits": [
+        "Releases shoulder tension",
+        "Stretches thoracic spine",
+        "Improves rotation"
+      ]
+    },
+    "shoulderSqueeze": {
+      "name": "Shoulder Blade Squeeze",
+      "description": "Strengthens the muscles between your shoulder blades to improve posture.",
+      "instructions": [
+        "Sit or stand with arms at sides",
+        "Pull shoulders back and down",
+        "Squeeze shoulder blades together",
+        "Hold for 2-3 seconds",
+        "Release and repeat"
+      ],
+      "proTips": [
+        "Imagine holding a pencil between shoulder blades",
+        "Keep neck relaxed",
+        "Do this hourly if you work at a desk"
+      ],
+      "benefits": [
+        "Improves posture",
+        "Strengthens rhomboids",
+        "Reduces neck strain"
+      ]
+    },
+    "thoracicExtension": {
+      "name": "Thoracic Extension",
+      "description": "Opens up the upper back to counter forward hunching.",
+      "instructions": [
+        "Sit on heels or in a chair",
+        "Place hands behind head",
+        "Gently arch upper back, looking up",
+        "Hold for 3-5 seconds",
+        "Return to neutral and repeat"
+      ],
+      "proTips": [
+        "Move from the upper back, not lower back",
+        "Keep core lightly engaged",
+        "Use a foam roller for deeper stretch"
+      ],
+      "benefits": [
+        "Improves thoracic mobility",
+        "Reduces hunching",
+        "Opens chest"
+      ]
+    },
+    "wallAngels": {
+      "name": "Wall Angels",
+      "description": "A posture-correcting exercise that strengthens upper back muscles.",
+      "instructions": [
+        "Stand with back flat against wall",
+        "Press lower back, shoulders, and head into wall",
+        "Raise arms to goal post position against wall",
+        "Slowly slide arms up and down",
+        "Keep all contact points touching wall"
+      ],
+      "proTips": [
+        "If lower back arches, bend knees slightly",
+        "Start with small range of motion",
+        "This reveals shoulder mobility limitations"
+      ],
+      "benefits": [
+        "Corrects rounded shoulders",
+        "Strengthens postural muscles",
+        "Improves awareness"
+      ]
+    },
+    "childPose": {
+      "name": "Child's Pose",
+      "description": "A restful pose that gently stretches the lower back and hips.",
+      "instructions": [
+        "Kneel on floor with toes together",
+        "Sit back on heels",
+        "Fold forward, extending arms in front",
+        "Rest forehead on floor",
+        "Breathe deeply and relax"
+      ],
+      "proTips": [
+        "Spread knees wider for more hip opening",
+        "Use a pillow under forehead if needed",
+        "Focus on elongating the spine"
+      ],
+      "benefits": [
+        "Releases lower back tension",
+        "Calms the mind",
+        "Stretches hips"
+      ]
+    },
+    "kneeToChest": {
+      "name": "Knee to Chest Stretch",
+      "description": "Gently stretches the lower back and glutes.",
+      "instructions": [
+        "Lie on your back with knees bent",
+        "Pull one knee toward chest",
+        "Hold behind thigh or shin",
+        "Keep other foot flat or extended",
+        "Hold, then switch sides"
+      ],
+      "proTips": [
+        "Keep shoulders relaxed on floor",
+        "Breathe into the lower back",
+        "Try pulling both knees in together"
+      ],
+      "benefits": [
+        "Relieves lower back pain",
+        "Stretches glutes",
+        "Reduces stiffness"
+      ]
+    },
+    "pelvicTilt": {
+      "name": "Pelvic Tilt",
+      "description": "Activates core muscles and gently mobilizes the lower spine.",
+      "instructions": [
+        "Lie on back with knees bent, feet flat",
+        "Flatten lower back into floor by tilting pelvis",
+        "Engage core muscles",
+        "Hold for 2-3 seconds",
+        "Release and repeat"
+      ],
+      "proTips": [
+        "Imagine pulling belly button to spine",
+        "Keep breathing throughout",
+        "Movement should be small and controlled"
+      ],
+      "benefits": [
+        "Strengthens core",
+        "Improves pelvic control",
+        "Reduces back strain"
+      ]
+    },
+    "supineTwist": {
+      "name": "Supine Spinal Twist",
+      "description": "A relaxing twist that stretches the lower back and improves rotation.",
+      "instructions": [
+        "Lie on back with arms out to sides",
+        "Bring knees to chest",
+        "Lower both knees to one side",
+        "Turn head opposite direction",
+        "Hold and breathe, then switch sides"
+      ],
+      "proTips": [
+        "Keep shoulders grounded",
+        "Use gravity, don't force the stretch",
+        "Great before bed for relaxation"
+      ],
+      "benefits": [
+        "Releases spinal tension",
+        "Improves rotation",
+        "Stretches obliques"
+      ]
+    },
+    "birdDog": {
+      "name": "Bird Dog",
+      "description": "A stability exercise that strengthens the lower back and core.",
+      "instructions": [
+        "Start in tabletop position",
+        "Extend right arm forward, left leg back",
+        "Keep hips and shoulders level",
+        "Hold for 2-3 seconds",
+        "Return and alternate sides"
+      ],
+      "proTips": [
+        "Move slowly to challenge balance",
+        "Keep core engaged throughout",
+        "Imagine balancing a cup on your back"
+      ],
+      "benefits": [
+        "Builds core stability",
+        "Strengthens back extensors",
+        "Improves balance"
+      ]
+    },
+    "deadBug": {
+      "name": "Dead Bug",
+      "description": "A core stability exercise that protects the lower back.",
+      "instructions": [
+        "Lie on back with arms reaching to ceiling",
+        "Lift legs to 90-degree angle",
+        "Lower opposite arm and leg toward floor",
+        "Keep lower back pressed to floor",
+        "Return and alternate sides"
+      ],
+      "proTips": [
+        "Move slowly and with control",
+        "Exhale as you extend",
+        "Stop if lower back arches"
+      ],
+      "benefits": [
+        "Strengthens deep core",
+        "Protects spine",
+        "Improves coordination"
+      ]
+    },
+    "plank": {
+      "name": "Forearm Plank",
+      "description": "The classic core strengthener that builds overall stability.",
+      "instructions": [
+        "Start on forearms and toes",
+        "Align body in straight line",
+        "Engage core and glutes",
+        "Keep neck neutral",
+        "Hold position and breathe"
+      ],
+      "proTips": [
+        "Don't let hips sag or pike up",
+        "Squeeze glutes for lower back support",
+        "Start with shorter holds, build up"
+      ],
+      "benefits": [
+        "Builds core endurance",
+        "Improves posture",
+        "Full body activation"
+      ]
+    },
+    "gluteBridge": {
+      "name": "Glute Bridge",
+      "description": "Strengthens glutes and hamstrings to support the lower back.",
+      "instructions": [
+        "Lie on back with knees bent, feet flat",
+        "Press through heels to lift hips",
+        "Squeeze glutes at the top",
+        "Create straight line from shoulders to knees",
+        "Lower slowly and repeat"
+      ],
+      "proTips": [
+        "Don't hyperextend the lower back",
+        "Drive through heels, not toes",
+        "Add a pause at the top for intensity"
+      ],
+      "benefits": [
+        "Strengthens posterior chain",
+        "Reduces back pain",
+        "Improves hip mobility"
+      ]
+    },
+    "sidePlank": {
+      "name": "Side Plank",
+      "description": "Targets the obliques and lateral stabilizers.",
+      "instructions": [
+        "Lie on side with elbow under shoulder",
+        "Stack feet or stagger them",
+        "Lift hips to create straight line",
+        "Reach top arm to ceiling",
+        "Hold, then switch sides"
+      ],
+      "proTips": [
+        "Modify by dropping bottom knee",
+        "Keep hips stacked, don't roll forward",
+        "Engage core before lifting"
+      ],
+      "benefits": [
+        "Strengthens obliques",
+        "Improves lateral stability",
+        "Balances core strength"
+      ]
+    },
+    "crunch": {
+      "name": "Modified Crunch",
+      "description": "A controlled crunch that targets the upper abdominals safely.",
+      "instructions": [
+        "Lie on back with knees bent",
+        "Place hands behind head for support",
+        "Lift shoulders off floor using abs",
+        "Keep lower back pressed down",
+        "Lower with control and repeat"
+      ],
+      "proTips": [
+        "Don't pull on your neck",
+        "Focus on the squeeze, not the height",
+        "Exhale as you lift"
+      ],
+      "benefits": [
+        "Strengthens rectus abdominis",
+        "Improves core control",
+        "Safe for beginners"
+      ]
+    }
+  },
+  "proTips": {
+    "label": "Pro Tip",
+    "tip-1": {
+      "title": "Consistency Over Intensity",
+      "content": "10 minutes daily beats 1 hour once a week. Small, regular practice builds lasting strength and habits."
+    },
+    "tip-2": {
+      "title": "Desk Break Reminder",
+      "content": "Set a timer to stand and stretch every 30-45 minutes. Your spine needs regular movement to stay healthy."
+    },
+    "tip-3": {
+      "title": "Breathe Into the Stretch",
+      "content": "Deep breathing helps muscles relax and increases the effectiveness of stretches. Never hold your breath."
+    },
+    "tip-4": {
+      "title": "Listen to Your Body",
+      "content": "Sharp pain is a stop sign. Mild discomfort during stretching is normal, but pain is not. Adjust as needed."
+    },
+    "tip-5": {
+      "title": "Posture Check",
+      "content": "Ears over shoulders, shoulders over hips. Check your alignment several times throughout the day."
+    },
+    "tip-6": {
+      "title": "Sleep Position Matters",
+      "content": "Side sleeping with a pillow between knees reduces spinal stress. Avoid sleeping on your stomach."
+    },
+    "tip-7": {
+      "title": "Progress Takes Time",
+      "content": "Spinal flexibility and core strength develop gradually. Celebrate small wins and trust the process."
+    },
+    "tip-8": {
+      "title": "Morning Movement",
+      "content": "Your spine is most vulnerable in the morning. Start with gentle movements before intense activity."
+    }
+  }
+}

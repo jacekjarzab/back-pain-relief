@@ -11,6 +11,10 @@ import {
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { homeOutline, fitnessOutline, statsChartOutline, settingsOutline } from 'ionicons/icons';
+import { useTranslation } from 'react-i18next';
+
+/* i18n */
+import './i18n';
 
 /* Pages */
 import Dashboard from './pages/Dashboard';
@@ -56,54 +60,58 @@ setupIonicReact({
   mode: 'ios', // Use iOS design for consistent look across platforms
 });
 
-const App: React.FC = () => (
-  <IonApp>
-    <AppProvider>
-      <IonReactRouter>
-        <IonTabs>
-          <IonRouterOutlet>
-            <Route exact path="/dashboard">
-              <Dashboard />
-            </Route>
-            <Route exact path="/workout">
-              <Workout />
-            </Route>
-            <Route exact path="/exercise/:id">
-              <ExerciseDetail />
-            </Route>
-            <Route exact path="/progress">
-              <Progress />
-            </Route>
-            <Route exact path="/settings">
-              <Settings />
-            </Route>
-            <Route exact path="/">
-              <Redirect to="/dashboard" />
-            </Route>
-          </IonRouterOutlet>
+const App: React.FC = () => {
+  const { t } = useTranslation();
 
-          <IonTabBar slot="bottom">
-            <IonTabButton tab="dashboard" href="/dashboard">
-              <IonIcon icon={homeOutline} />
-              <IonLabel>Today</IonLabel>
-            </IonTabButton>
-            <IonTabButton tab="workout" href="/workout">
-              <IonIcon icon={fitnessOutline} />
-              <IonLabel>Workout</IonLabel>
-            </IonTabButton>
-            <IonTabButton tab="progress" href="/progress">
-              <IonIcon icon={statsChartOutline} />
-              <IonLabel>Progress</IonLabel>
-            </IonTabButton>
-            <IonTabButton tab="settings" href="/settings">
-              <IonIcon icon={settingsOutline} />
-              <IonLabel>Settings</IonLabel>
-            </IonTabButton>
-          </IonTabBar>
-        </IonTabs>
-      </IonReactRouter>
-    </AppProvider>
-  </IonApp>
-);
+  return (
+    <IonApp>
+      <AppProvider>
+        <IonReactRouter>
+          <IonTabs>
+            <IonRouterOutlet>
+              <Route exact path="/dashboard">
+                <Dashboard />
+              </Route>
+              <Route exact path="/workout">
+                <Workout />
+              </Route>
+              <Route exact path="/exercise/:id">
+                <ExerciseDetail />
+              </Route>
+              <Route exact path="/progress">
+                <Progress />
+              </Route>
+              <Route exact path="/settings">
+                <Settings />
+              </Route>
+              <Route exact path="/">
+                <Redirect to="/dashboard" />
+              </Route>
+            </IonRouterOutlet>
+
+            <IonTabBar slot="bottom">
+              <IonTabButton tab="dashboard" href="/dashboard">
+                <IonIcon icon={homeOutline} />
+                <IonLabel>{t('navigation.home')}</IonLabel>
+              </IonTabButton>
+              <IonTabButton tab="workout" href="/workout">
+                <IonIcon icon={fitnessOutline} />
+                <IonLabel>{t('navigation.workout')}</IonLabel>
+              </IonTabButton>
+              <IonTabButton tab="progress" href="/progress">
+                <IonIcon icon={statsChartOutline} />
+                <IonLabel>{t('navigation.progress')}</IonLabel>
+              </IonTabButton>
+              <IonTabButton tab="settings" href="/settings">
+                <IonIcon icon={settingsOutline} />
+                <IonLabel>{t('navigation.settings')}</IonLabel>
+              </IonTabButton>
+            </IonTabBar>
+          </IonTabs>
+        </IonReactRouter>
+      </AppProvider>
+    </IonApp>
+  );
+};
 
 export default App;

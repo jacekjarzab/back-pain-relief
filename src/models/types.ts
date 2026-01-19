@@ -63,6 +63,7 @@ export interface UserPreferences {
   reminderTime?: string; // HH:mm format
   soundEnabled: boolean;
   hapticEnabled: boolean;
+  language: 'en' | 'pl';
 }
 
 // Pro tip for motivation
@@ -89,6 +90,7 @@ export const defaultPreferences: UserPreferences = {
   reminderEnabled: false,
   soundEnabled: true,
   hapticEnabled: true,
+  language: 'en',
 };
 
 // Default user progress

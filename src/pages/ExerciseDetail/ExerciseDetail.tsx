@@ -29,17 +29,19 @@ import {
   imageOutline,
 } from 'ionicons/icons';
 
-import { exercises } from '../../data/exercises';
 import { useApp } from '../../context/AppContext';
+import { useTranslation } from 'react-i18next';
+import { useTranslatedExercise } from '../../hooks/useTranslatedExercises';
 import './ExerciseDetail.css';
 
 const ExerciseDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const history = useHistory();
+  const { t } = useTranslation();
   const { todayRoutine, completeExercise } = useApp();
   const [viewMode, setViewMode] = useState<'image' | 'video'>('image');
 
-  const exercise = exercises.find(e => e.id === id);
+  const exercise = useTranslatedExercise(id);
   const workoutExercise = todayRoutine?.exercises.find(we => we.exercise.id === id);
   const isCompleted = workoutExercise?.completed ?? false;
 
@@ -47,8 +49,8 @@ const ExerciseDetail: React.FC = () => {
     return (
       <IonPage>
         <IonContent className="exercise-not-found">
-          <p>Exercise not found</p>
-          <IonButton onClick={() => history.goBack()}>Go Back</IonButton>
+          <p>{t('workout.exercise')} {t('common.error').toLowerCase()}</p>
+          <IonButton onClick={() => history.goBack()}>{t('common.back')}</IonButton>
         </IonContent>
       </IonPage>
     );
@@ -65,6 +67,15 @@ const ExerciseDetail: React.FC = () => {
       case 'advanced': return 'danger';
       default: return 'medium';
     }
+  };
+
+  const formatDuration = (seconds: number): string => {
+    if (seconds >= 60) {
+      const mins = Math.floor(seconds / 60);
+      const secs = seconds % 60;
+      return secs > 0 ? `${mins}m ${secs}s` : `${mins}m`;
+    }
+    return `${seconds}s`;
   };
 
   return (
@@ -137,7 +148,7 @@ const ExerciseDetail: React.FC = () => {
                 animate={{ scale: 1 }}
               >
                 <IonIcon icon={checkmarkCircleOutline} />
-                Completed
+                {t('workout.completed')}
               </motion.div>
             )}
           </div>
@@ -149,15 +160,13 @@ const ExerciseDetail: React.FC = () => {
 
             <div className="detail-chips">
               <IonChip color={getDifficultyColor(exercise.difficulty)}>
-                <IonIcon icon={fitnessOutline} />
-                {exercise.difficulty}
+                <IonIcon icon={fitnessOutline} />{t(`exercises.difficulty.${exercise.difficulty}`)}
               </IonChip>
               <IonChip color="medium">
-                <IonIcon icon={timeOutline} />
-                {exercise.durationSeconds}s
+                <IonIcon icon={timeOutline} />{formatDuration(exercise.durationSeconds)}
               </IonChip>
               <IonChip color="primary" outline>
-                {exercise.bodyArea.replace('-', ' ')}
+                {t(`exercises.bodyArea.${exercise.bodyArea}`)}
               </IonChip>
             </div>
           </div>
@@ -166,7 +175,7 @@ const ExerciseDetail: React.FC = () => {
           <section className="detail-section">
             <div className="section-title">
               <IonIcon icon={listOutline} />
-              <h3>Instructions</h3>
+              <h3>{t('exercises.instructions')}</h3>
             </div>
             <IonList className="instructions-list">
               {exercise.instructions.map((instruction, index) => (
@@ -182,7 +191,7 @@ const ExerciseDetail: React.FC = () => {
           <section className="detail-section">
             <div className="section-title">
               <IonIcon icon={bulbOutline} />
-              <h3>Pro Tips</h3>
+              <h3>{t('exercises.proTips')}</h3>
             </div>
             <ul className="tips-list">
               {exercise.proTips.map((tip, index) => (
@@ -195,7 +204,7 @@ const ExerciseDetail: React.FC = () => {
           <section className="detail-section">
             <div className="section-title">
               <IonIcon icon={heartOutline} />
-              <h3>Benefits</h3>
+              <h3>{t('exercises.benefits')}</h3>
             </div>
             <div className="benefits-list">
               {exercise.benefits.map((benefit, index) => (
@@ -210,8 +219,7 @@ const ExerciseDetail: React.FC = () => {
           {workoutExercise && !isCompleted && (
             <div className="detail-actions">
               <IonButton expand="block" onClick={handleComplete} color="success">
-                <IonIcon slot="start" icon={checkmarkCircleOutline} />
-                Mark as Complete
+                <IonIcon slot="start" icon={checkmarkCircleOutline} />{t('workout.complete')}
               </IonButton>
             </div>
           )}

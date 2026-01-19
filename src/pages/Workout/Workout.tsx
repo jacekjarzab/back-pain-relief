@@ -26,11 +26,14 @@ import {
 import { Haptics, ImpactStyle } from '@capacitor/haptics';
 
 import { useApp } from '../../context/AppContext';
+import { useTranslation } from 'react-i18next';
+import { useExerciseTranslation } from '../../hooks/useTranslatedExercises';
 import WorkoutTimer from '../../components/WorkoutTimer';
 import './Workout.css';
 
 const Workout: React.FC = () => {
   const history = useHistory();
+  const { t } = useTranslation();
   const { todayRoutine, completeExercise, completeWorkout, preferences } = useApp();
 
   const [currentIndex, setCurrentIndex] = useState(() => {
@@ -42,7 +45,8 @@ const Workout: React.FC = () => {
 
   const currentExercise = todayRoutine?.exercises[currentIndex];
   const isLastExercise = currentIndex === (todayRoutine?.exercises.length ?? 0) - 1;
-   const allCompleted = todayRoutine?.exercises.every(e => e.completed) ?? false;
+  const allCompleted = todayRoutine?.exercises.every(e => e.completed) ?? false;
+  const { translateExercise } = useExerciseTranslation();
 
    const handleComplete = async () => {
     if (!currentExercise) return;
@@ -88,16 +92,16 @@ const Workout: React.FC = () => {
     return (
       <IonPage>
         <IonContent className="workout-empty">
-          <p>No workout available</p>
+          <p>{t('workout.title')} {t('common.error').toLowerCase()}</p>
           <IonButton onClick={() => history.push('/dashboard')}>
-            Go to Dashboard
+            {t('navigation.home')}
           </IonButton>
         </IonContent>
       </IonPage>
     );
   }
 
-  const exercise = currentExercise.exercise;
+  const exercise = translateExercise(currentExercise.exercise);
 
   return (
     <IonPage>
@@ -171,7 +175,7 @@ const Workout: React.FC = () => {
 
               <div className="exercise-overlay">
                 <IonChip color="light" className="exercise-area-chip">
-                  {exercise.bodyArea.replace('-', ' ')}
+                  {t(`exercises.bodyArea.${exercise.bodyArea}`)}
                 </IonChip>
               </div>
             </div>
@@ -203,17 +207,17 @@ const Workout: React.FC = () => {
         <div className="workout-navigation">
           <IonButton fill="clear" onClick={handlePrevious} disabled={currentIndex === 0}>
             <IonIcon slot="start" icon={chevronBackOutline} />
-            Previous
+            {t('common.previous')}
           </IonButton>
 
           {allCompleted || isLastExercise ? (
             <IonButton color="success" onClick={handleFinishWorkout}>
               <IonIcon slot="start" icon={checkmarkCircleOutline} />
-              Finish Workout
+              {t('workout.finishWorkout')}
             </IonButton>
           ) : (
             <IonButton fill="clear" onClick={handleNext}>
-              Next
+              {t('common.next')}
               <IonIcon slot="end" icon={chevronForwardOutline} />
             </IonButton>
           )}

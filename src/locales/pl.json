@@ -1,0 +1,490 @@
+{
+  "common": {
+    "settings": "Ustawienia",
+    "save": "Zapisz",
+    "cancel": "Anuluj",
+    "delete": "Usuń",
+    "confirm": "Potwierdź",
+    "yes": "Tak",
+    "no": "Nie",
+    "ok": "OK",
+    "close": "Zamknij",
+    "back": "Wstecz",
+    "next": "Dalej",
+    "previous": "Poprzedni",
+    "loading": "Ładowanie...",
+    "error": "Błąd",
+    "success": "Sukces",
+    "warning": "Ostrzeżenie",
+    "info": "Informacja"
+  },
+  "navigation": {
+    "home": "Strona główna",
+    "workout": "Trening",
+    "progress": "Postęp",
+    "settings": "Ustawienia"
+  },
+  "settings": {
+    "title": "Ustawienia",
+    "workoutPreferences": "Preferencje treningu",
+    "difficultyLevel": "Poziom trudności",
+    "difficultyDescription": "Dostosuj do swojego poziomu fitness",
+    "beginner": "Początkujący",
+    "intermediate": "Średniozaawansowany",
+    "advanced": "Zaawansowany",
+    "workoutDuration": "Czas treningu",
+    "durationDescription": "Jak długo trwa każda sesja",
+    "short": "Krótki (~10 min)",
+    "medium": "Średni (~15 min)",
+    "long": "Długi (~20 min)",
+    "focusAreas": "Obszary skupienia",
+    "focusAreasDescription": "Które obszary ćwiczyć",
+    "upperBack": "Górny grzbiet",
+    "lowerBack": "Dolny grzbiet",
+    "core": "Korpus",
+    "reminders": "Przypomnienia",
+    "dailyReminder": "Codzienne przypomnienie",
+    "reminderDescription": "Otrzymuj powiadomienia o treningu",
+    "reminderTime": "Czas przypomnienia",
+    "reminderTimeDescription": "Wybierz, kiedy chcesz otrzymywać codzienne przypomnienie o treningu.",
+    "appPreferences": "Preferencje aplikacji",
+    "soundEffects": "Efekty dźwiękowe",
+    "soundDescription": "Odtwarzaj dźwięki podczas treningu",
+    "hapticFeedback": "Wibracje",
+    "hapticDescription": "Wibruj przy akcjach",
+    "language": "Język",
+    "languageDescription": "Wybierz preferowany język",
+    "english": "English",
+    "polish": "Polski",
+    "dataManagement": "Zarządzanie danymi",
+    "deleteProgressHistory": "Usuń historię postępów",
+    "deleteProgressDescription": "Zresetuj passę, treningi i całą historię",
+    "deleteProgressWarning": "Usunięcie postępów nie może zostać cofnięte. Twoje preferencje zostaną zachowane.",
+    "regenerateNote": "Zmiana preferencji treningu wygeneruje ponownie dzisiejszą rutynę.",
+    "deleteProgressHeader": "Usuń historię postępów",
+    "deleteProgressSubHeader": "Ta akcja nie może zostać cofnięta",
+    "deleteProgressMessage": "Czy na pewno chcesz usunąć wszystkie swoje postępy? To zresetuje Twoją {{streak}}-dniową passę, {{workouts}} ukończone treningi i całą historię.",
+    "progressDeleted": "Historia postępów została usunięta",
+    "reminderSet": "Codzienne przypomnienie ustawione na {{time}}",
+    "reminderDisabled": "Codzienne przypomnienie wyłączone",
+    "reminderUpdated": "Przypomnienie zaktualizowane na {{time}}",
+    "enableNotifications": "Włącz powiadomienia w ustawieniach urządzenia",
+    "reminderTimeTitle": "Czas przypomnienia"
+  },
+  "home": {
+    "welcome": "Witaj w Back Pain Relief",
+    "startWorkout": "Rozpocznij trening",
+    "viewProgress": "Zobacz postęp",
+    "currentStreak": "Aktualna passa",
+    "days": "dni",
+    "totalWorkouts": "Łącznie treningów",
+    "todayRoutine": "Dzisiejsza rutyna",
+    "noRoutine": "Brak wygenerowanej rutyny",
+    "generateRoutine": "Wygeneruj rutynę"
+  },
+  "workout": {
+    "title": "Trening",
+    "exercise": "Ćwiczenie",
+    "of": "z",
+    "complete": "Ukończ",
+    "completed": "Ukończone",
+    "rest": "Odpoczynek",
+    "seconds": "sekund",
+    "nextExercise": "Następne ćwiczenie",
+    "finishWorkout": "Zakończ trening",
+    "workoutComplete": "Trening ukończony!",
+    "greatJob": "Świetna robota! Ukończyłeś trening.",
+    "viewResults": "Zobacz wyniki",
+    "startOver": "Zacznij od nowa",
+    "image": "Obraz",
+    "video": "Wideo"
+  },
+  "progress": {
+    "title": "Postęp",
+    "streak": "Passa",
+    "workoutsCompleted": "Ukończone treningi",
+    "totalTime": "Łączny czas",
+    "minutes": "minut",
+    "weeklyGoal": "Najlepsza passa",
+    "achieved": "Ukończone",
+    "currentWeek": "Ćwiczenia",
+    "last7Days": "Minuty",
+    "monthlyStats": "Minuty",
+    "resetProgress": "Resetuj postęp",
+    "days": {
+      "sun": "Nie",
+      "mon": "Pon",
+      "tue": "Wto",
+      "wed": "Śro",
+      "thu": "Czw",
+      "fri": "Pią",
+      "sat": "Sob"
+    }
+  },
+  "exercises": {
+    "instructions": "Instrukcje",
+    "proTips": "Porady eksperta",
+    "benefits": "Zalety",
+    "difficulty": {
+      "beginner": "Początkujący",
+      "intermediate": "Średniozaawansowany",
+      "advanced": "Zaawansowany"
+    },
+    "bodyArea": {
+      "upper-back": "Górny grzbiet",
+      "lower-back": "Dolny grzbiet",
+      "core": "Korpus",
+      "full-back": "Cały grzbiet"
+    },
+    "catCow": {
+      "name": "Rozciąganie Kot-Krowa",
+      "description": "Delikatny przepływ między dwiema pozami rozgrzewający kręgosłup i łagodzący napięcie.",
+      "instructions": [
+        "Zacznij na rękach i kolanach w pozycji stołowej",
+        "Wdech: Opuszczaj brzuch, podnieś głowę i ogon (Krowa)",
+        "Wydech: Zaokrąglij kręgosłup, schowaj podbródek do klatki (Kot)",
+        "Przepływaj płynnie między pozycjami",
+        "Dopasuj ruch do oddechu"
+      ],
+      "proTips": [
+        "Zachowaj ruchy wolne i kontrolowane",
+        "Skup się na odczuwaniu ruchu każdego kręgu",
+        "Świetne jako poranne rozciąganie"
+      ],
+      "benefits": [
+        "Poprawia elastyczność kręgosłupa",
+        "Zmniejsza napięcie pleców",
+        "Promuje relaksację"
+      ]
+    },
+    "threadNeedle": {
+      "name": "Przeciągnij igłę",
+      "description": "Rotacyjne rozciąganie otwierające górny grzbiet i ramiona.",
+      "instructions": [
+        "Zacznij w pozycji stołowej",
+        "Przesuń prawą rękę pod ciało, dłoń do góry",
+        "Oprzyj prawe ramię i skroń na podłodze",
+        "Trzymaj i oddychaj głęboko",
+        "Wróć i powtórz po lewej stronie"
+      ],
+      "proTips": [
+        "Zachowaj biodra na tym samym poziomie nad kolanami",
+        "Użyj górnej ręki do wsparcia lub sięgnij w górę",
+        "Oddychaj w rozciąganie"
+      ],
+      "benefits": [
+        "Uwolnia napięcie ramion",
+        "Rozciąga kręgosłup piersiowy",
+        "Poprawia rotację"
+      ]
+    },
+    "shoulderSqueeze": {
+      "name": "Ściskanie łopatki",
+      "description": "Wzmacnia mięśnie między łopatkami poprawiając postawę.",
+      "instructions": [
+        "Usiądź lub stań z rękami po bokach",
+        "Pociągnij ramiona do tyłu i w dół",
+        "Ściśnij łopatki razem",
+        "Trzymaj 2-3 sekundy",
+        "Zwolnij i powtórz"
+      ],
+      "proTips": [
+        "Wyobraź sobie trzymanie ołówka między łopatami",
+        "Zachowaj szyję rozluźnioną",
+        "Rób co godzinę przy pracy biurowej"
+      ],
+      "benefits": [
+        "Poprawia postawę",
+        "Wzmacnia romboidalne",
+        "Zmniejsza napięcie szyi"
+      ]
+    },
+    "thoracicExtension": {
+      "name": "Ekstensja piersiowa",
+      "description": "Otwiera górny grzbiet przeciwdziałając pochylaniu.",
+      "instructions": [
+        "Usiądź na piętach lub krześle",
+        "Umieść ręce za głową",
+        "Delikatnie wygnij górny grzbiet patrząc w górę",
+        "Trzymaj 3-5 sekund",
+        "Wróć do neutralnej i powtórz"
+      ],
+      "proTips": [
+        "Ruszaj górnym grzbietem, nie dolnym",
+        "Lekko zaangażuj korpus",
+        "Użyj rolki do głębszego rozciągania"
+      ],
+      "benefits": [
+        "Poprawia mobilność piersiową",
+        "Zmniejsza pochylanie",
+        "Otwiera klatkę piersiową"
+      ]
+    },
+    "wallAngels": {
+      "name": "Anioły ścienne",
+      "description": "Ćwiczenie korygujące postawę wzmacniające górny grzbiet.",
+      "instructions": [
+        "Stań plecami do ściany",
+        "Przyciśnij dolny grzbiet, ramiona, głowę do ściany",
+        "Podnieś ręce do pozycji bramki",
+        "Powoli przesuwaj ręce w górę/dół",
+        "Zachowaj kontakt ze ścianą"
+      ],
+      "proTips": [
+        "Jeśli grzbiet się wygina, zegnij kolana",
+        "Zacznij małym zakresem",
+        "Ujawnia ograniczenia ramion"
+      ],
+      "benefits": [
+        "Koryguje zaokrąglone ramiona",
+        "Wzmacnia posturalne",
+        "Poprawia świadomość"
+      ]
+    },
+    "childPose": {
+      "name": "Poza dziecka",
+      "description": "Spokojna poza rozciągająca dolny grzbiet i biodra.",
+      "instructions": [
+        "Uklęknij, palce razem",
+        "Usiądź na piętach",
+        "Złóż do przodu, ręce przed sobą",
+        "Czoło na podłodze",
+        "Oddychaj głęboko"
+      ],
+      "proTips": [
+        "Szerzej kolana dla bioder",
+        "Poduszka pod czoło jeśli potrzeba",
+        "Wydłużaj kręgosłup"
+      ],
+      "benefits": [
+        "Uwolnia napięcie dolnego grzbietu",
+        "Uspokaja umysł",
+        "Rozciąga biodra"
+      ]
+    },
+    "kneeToChest": {
+      "name": "Kolano do klatki",
+      "description": "Rozciąga dolny grzbiet i pośladki.",
+      "instructions": [
+        "Leżąc, kolana zgięte",
+        "Pociągnij kolano do klatki",
+        "Trzymaj udo/łydkę",
+        "Druga stopa płaska",
+        "Zmiana stron"
+      ],
+      "proTips": [
+        "Ramiona rozluźnione",
+        "Oddychaj w grzbiet",
+        "Oba kolana razem"
+      ],
+      "benefits": [
+        "Łagodzi ból grzbietu",
+        "Rozciąga pośladki",
+        "Zmniejsza sztywność"
+      ]
+    },
+    "pelvicTilt": {
+      "name": "Przechył miednicy",
+      "description": "Aktywuje korpus mobilizując dolny kręgosłup.",
+      "instructions": [
+        "Leżąc, kolana zgięte",
+        "Spłaszcz grzbiet przechylając miednicę",
+        "Zaangażuj korpus",
+        "Trzymaj 2-3s",
+        "Powtórz"
+      ],
+      "proTips": [
+        "Pępek do kręgosłupa",
+        "Oddychaj",
+        "Mały ruch"
+      ],
+      "benefits": [
+        "Wzmacnia korpus",
+        "Kontrola miednicy",
+        "Mniej obciążenia pleców"
+      ]
+    },
+    "supineTwist": {
+      "name": "Leżący skręt",
+      "description": "Relaksujący skręt rozciągający grzbiet.",
+      "instructions": [
+        "Leżąc, ręce na boki",
+        "Kolana do klatki",
+        "Kolana na stronę",
+        "Głowa przeciwnie",
+        "Zmiana stron"
+      ],
+      "proTips": [
+        "Ramiona uziemione",
+        "Grawitacja, nie siła",
+        "Przed snem"
+      ],
+      "benefits": [
+        "Uwolnia napięcie kręgosłupa",
+        "Poprawia rotację",
+        "Rozciąga skośne"
+      ]
+    },
+    "birdDog": {
+      "name": "Ptak-pies",
+      "description": "Stabilizacja wzmacniająca grzbiet i korpus.",
+      "instructions": [
+        "Pozycja stołowa",
+        "Ręka przód, noga tył",
+        "Biodra/rama poziom",
+        "Trzymaj 2-3s",
+        "Zmiana"
+      ],
+      "proTips": [
+        "Powoli dla równowagi",
+        "Korpus zaangażowany",
+        "Filiżanka na plecach"
+      ],
+      "benefits": [
+        "Stabilność korpusu",
+        "Prostowniki pleców",
+        "Równowaga"
+      ]
+    },
+    "deadBug": {
+      "name": "Martwy żuk",
+      "description": "Stabilizacja chroniąca grzbiet.",
+      "instructions": [
+        "Leżąc, ręce sufit",
+        "Nogi 90°",
+        "Przeciwna ręka/noga w dół",
+        "Grzbiet przyciśnięty",
+        "Zmiana"
+      ],
+      "proTips": [
+        "Powoli",
+        "Wydychaj",
+        "Stop jeśli arch"
+      ],
+      "benefits": [
+        "Głęboki korpus",
+        "Ochrona kręgosłupa",
+        "Koordynacja"
+      ]
+    },
+    "plank": {
+      "name": "Deska przedramiona",
+      "description": "Klasyka dla stabilności.",
+      "instructions": [
+        "Przedramiona/palcami",
+        "Prosta linia",
+        "Korpus/pośladki",
+        "Szyja neutralna",
+        "Trzymaj/oddychaj"
+      ],
+      "proTips": [
+        "Biodra nie sag/pike",
+        "Pośladki dla grzbietu",
+        "Krócej, buduj"
+      ],
+      "benefits": [
+        "Wytrzymałość korpusu",
+        "Postawa",
+        "Całe ciało"
+      ]
+    },
+    "gluteBridge": {
+      "name": "Mostek biodrowy",
+      "description": "Wzmacnia pośladki dla grzbietu.",
+      "instructions": [
+        "Leżąc, kolana zgięte",
+        "Pięty podnoszą biodra",
+        "Pośladki ścisnąć",
+        "Linia ramię-kolano",
+        "Powoli w dół"
+      ],
+      "proTips": [
+        "Nie przeprost",
+        "Pięty, nie palce",
+        "Pauza górze"
+      ],
+      "benefits": [
+        "Tylny łańcuch",
+        "Mniej bólu pleców",
+        "Mobilność bioder"
+      ]
+    },
+    "sidePlank": {
+      "name": "Boczna deska",
+      "description": "Skośne i stabilizatory boczne.",
+      "instructions": [
+        "Bok, łokieć pod ramieniem",
+        "Stopy ułożone",
+        "Biodra w górę",
+        "Ręka sufit",
+        "Zmiana stron"
+      ],
+      "proTips": [
+        "Dolne kolano dla modyfikacji",
+        "Biodra stacked",
+        "Korpus przed lift"
+      ],
+      "benefits": [
+        "Skośne",
+        "Stabilność boczna",
+        "Balans korpusu"
+      ]
+    },
+    "crunch": {
+      "name": "Brzuszki modyfikowane",
+      "description": "Kontrolowane dla górnego brzucha.",
+      "instructions": [
+        "Leżąc, kolana zgięte",
+        "Ręce za głową",
+        "Ramiona absami",
+        "Grzbiet przyciśnięty",
+        "Kontrolowany dół"
+      ],
+      "proTips": [
+        "Nie ciągnij szyi",
+        "Ścisk, nie wysokość",
+        "Wydychaj lift"
+      ],
+      "benefits": [
+        "Prosty brzucha",
+        "Kontrola korpusu",
+        "Bezpieczne"
+      ]
+    }
+  },
+  "proTips": {
+    "label": "Wskazówka",
+    "tip-1": {
+      "title": "Konsekwencja ponad intensywność",
+      "content": "10 minut dziennie bije 1 godzinę raz w tygodniu. Mała, regularna praktyka buduje trwałą siłę i nawyki."
+    },
+    "tip-2": {
+      "title": "Przypomnienie o przerwie przy biurku",
+      "content": "Ustaw minutnik, aby wstać i rozciągnąć się co 30-45 minut. Twój kręgosłup potrzebuje regularnego ruchu, aby pozostać zdrowym."
+    },
+    "tip-3": {
+      "title": "Oddychaj w rozciąganie",
+      "content": "Głębokie oddychanie pomaga mięśniom się rozluźnić i zwiększa skuteczność rozciągania. Nigdy nie wstrzymuj oddechu."
+    },
+    "tip-4": {
+      "title": "Słuchaj swojego ciała",
+      "content": "Ostry ból to znak stop. Łagodny dyskomfort podczas rozciągania jest normalny, ale ból nie. Dostosuj w razie potrzeby."
+    },
+    "tip-5": {
+      "title": "Sprawdź postawę",
+      "content": "Uszy nad ramionami, ramiona nad biodrami. Sprawdź swoje ustawienie kilka razy dziennie."
+    },
+    "tip-6": {
+      "title": "Pozycja snu ma znaczenie",
+      "content": "Spanie na boku z poduszką między kolanami zmniejsza stres kręgosłupa. Unikaj spania na brzuchu."
+    },
+    "tip-7": {
+      "title": "Postęp zajmuje czas",
+      "content": "Elastyczność kręgosłupa i siła korpusu rozwijają się stopniowo. Świętuj małe zwycięstwa i zaufaj procesowi."
+    },
+    "tip-8": {
+      "title": "Ruch poranny",
+      "content": "Twój kręgosłup jest najbardziej wrażliwy rano. Rozpocznij od delikatnych ruchów przed intensywną aktywnością."
+    }
+  }
+}
