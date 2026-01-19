@@ -16,19 +16,23 @@ const reminderMessages = [
 ];
 
 class NotificationService {
-  private isNative: boolean;
+  private get isNative(): boolean {
+    return Capacitor.isNativePlatform();
+  }
 
-  constructor() {
-    this.isNative = Capacitor.isNativePlatform();
+  private get isAvailable(): boolean {
+    // Check if we're on a real native platform (iOS/Android)
+    const platform = Capacitor.getPlatform();
+    return platform === 'ios' || platform === 'android';
   }
 
   /**
    * Request permission to show notifications
    */
   async requestPermission(): Promise<boolean> {
-    if (!this.isNative) {
-      console.log('Notifications not available on web');
-      return false;
+    if (!this.isAvailable) {
+      console.log('Notifications not available on web - simulating success');
+      return true; // Return true on web so UI can proceed
     }
 
     try {
@@ -44,8 +48,8 @@ class NotificationService {
    * Check if notifications are enabled
    */
   async checkPermission(): Promise<boolean> {
-    if (!this.isNative) {
-      return false;
+    if (!this.isAvailable) {
+      return true; // Return true on web so UI can proceed
     }
 
     try {
@@ -62,9 +66,9 @@ class NotificationService {
    * @param time - Time in HH:mm format (e.g., "09:00")
    */
   async scheduleDailyReminder(time: string): Promise<boolean> {
-    if (!this.isNative) {
-      console.log('Scheduling reminder for:', time, '(web - not actually scheduled)');
-      return true;
+    if (!this.isAvailable) {
+      console.log(`[Web] Reminder would be scheduled for ${time} on a real device`);
+      return true; // Return true on web so UI can proceed
     }
 
     try {
@@ -72,7 +76,7 @@ class NotificationService {
       await this.cancelDailyReminder();
 
       const [hours, minutes] = time.split(':').map(Number);
-      
+
       // Get a random message
       const message = reminderMessages[Math.floor(Math.random() * reminderMessages.length)];
 
@@ -119,8 +123,8 @@ class NotificationService {
    * Cancel the daily reminder notification
    */
   async cancelDailyReminder(): Promise<void> {
-    if (!this.isNative) {
-      console.log('Canceling daily reminder (web - no action needed)');
+    if (!this.isAvailable) {
+      console.log('[Web] Reminder would be canceled on a real device');
       return;
     }
 
@@ -136,7 +140,7 @@ class NotificationService {
    * Get pending notifications
    */
   async getPendingNotifications(): Promise<PendingResult | null> {
-    if (!this.isNative) {
+    if (!this.isAvailable) {
       return null;
     }
 
@@ -152,7 +156,7 @@ class NotificationService {
    * Add listeners for notification events
    */
   async addListeners(onNotificationClick: () => void): Promise<void> {
-    if (!this.isNative) {
+    if (!this.isAvailable) {
       return;
     }
 
