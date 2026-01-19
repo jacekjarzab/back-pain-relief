@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import {
   IonContent,
   IonHeader,
@@ -42,14 +42,9 @@ const Workout: React.FC = () => {
 
   const currentExercise = todayRoutine?.exercises[currentIndex];
   const isLastExercise = currentIndex === (todayRoutine?.exercises.length ?? 0) - 1;
-  const allCompleted = todayRoutine?.exercises.every(e => e.completed) ?? false;
+   const allCompleted = todayRoutine?.exercises.every(e => e.completed) ?? false;
 
-  const completedCount = useMemo(() =>
-    todayRoutine?.exercises.filter(e => e.completed).length ?? 0,
-    [todayRoutine]
-  );
-
-  const handleComplete = async () => {
+   const handleComplete = async () => {
     if (!currentExercise) return;
 
     // Haptic feedback
