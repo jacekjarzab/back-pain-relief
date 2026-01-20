@@ -109,6 +109,10 @@
   text-transform: capitalize;
 }
 
+.detail-chips ion-icon {
+  margin-right: 4px;
+}
+
 .detail-section {
   padding: 0 16px 24px 16px;
 }

@@ -92,20 +92,22 @@ const ExerciseCard: React.FC<ExerciseCardProps> = ({
               </IonChip>
             </div>
 
-            <p className="exercise-area">{t(`exercises.bodyArea.${exercise.bodyArea}`)}</p>
-          </IonCardContent>
+            <p className="exercise-area ion-display-flex ion-justify-content-between">
+              <span>{t(`exercises.bodyArea.${exercise.bodyArea}`)}</span>
+              {!completed && onComplete && (
+              <button
+                className="complete-button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onComplete();
+                }}
+              >
+                <IonIcon icon={checkmarkCircle} />
+              </button>
+            )}
+            </p>
 
-          {!completed && onComplete && (
-            <button
-              className="complete-button"
-              onClick={(e) => {
-                e.stopPropagation();
-                onComplete();
-              }}
-            >
-              <IonIcon icon={checkmarkCircle} />
-            </button>
-          )}
+          </IonCardContent>
         </div>
       </IonCard>
     </motion.div>

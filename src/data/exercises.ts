@@ -3,42 +3,42 @@ import { Exercise, ProTip } from '../models/types';
 // Real exercise images from Unsplash - high quality fitness photography
 const IMAGES = {
   // Upper Back
-  catCow: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&h=600&fit=crop',
-  threadNeedle: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&h=600&fit=crop',
-  shoulderSqueeze: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=600&fit=crop',
-  thoracicExtension: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800&h=600&fit=crop',
-  wallAngels: 'https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=800&h=600&fit=crop',
+  catCow: '/public/exercise/cat-cow/Fitness_Gif-1500x1000-catcow-5c5c85cac9e77c0001566641.gif',
+  threadNeedle: '/public/exercise/thread-needle/Thread-the-Needle-Pose-for-Pose-Pge-e1574899766929.jpeg',
+  shoulderSqueeze: '/public/exercise/shoulder-squeeze/scapular-squeeze-carole-rest.png',
+  thoracicExtension: '/public/exercise/thoracic-extension/thoracic-extension.png',
+  wallAngels: '/public/exercise/wall-angels/maxresdefault.jpg',
 
   // Lower Back
-  childPose: 'https://images.unsplash.com/photo-1552196563-55cd4e45efb3?w=800&h=600&fit=crop',
-  kneeToChest: 'https://images.unsplash.com/photo-1518459031867-a89b944bffe4?w=800&h=600&fit=crop',
-  pelvicTilt: 'https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=800&h=600&fit=crop',
-  supineTwist: 'https://images.unsplash.com/photo-1599447421416-3414500d18a5?w=800&h=600&fit=crop',
-  birdDog: 'https://images.unsplash.com/photo-1559888292-08be71dd097a?w=800&h=600&fit=crop',
+  childPose: '/public/exercise/child-pose/child-pose.png',
+  kneeToChest: '/public/exercise/knee-to-chest/istockphoto-1134840963-612x612.jpg',
+  pelvicTilt: '/public/exercise/pelvic-tilt/pelvic-tilt.png',
+  supineTwist: '/public/exercise/supine-twist/Verywell-20-4023748-SpinalTwist01-1729-5995b536845b340010c016cf.gif',
+  birdDog: '/public/exercise/bird-dog/bird-dog-exercise-1674234348.avif',
 
   // Core
-  deadBug: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800&h=600&fit=crop',
-  plank: 'https://images.unsplash.com/photo-1566241142559-40e1dab266c6?w=800&h=600&fit=crop',
-  gluteBridge: 'https://images.unsplash.com/photo-1434682881908-b43d0467b798?w=800&h=600&fit=crop',
-  sidePlank: 'https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?w=800&h=600&fit=crop',
-  crunch: 'https://images.unsplash.com/photo-1571019613576-2b22c76fd955?w=800&h=600&fit=crop',
+  deadBug: '/public/exercise/dead-bug/dead-bug.webp',
+  plank: '/public/exercise/plank/photo-1566241142559-40e1dab266c6.jpeg',
+  gluteBridge: '/public/exercise/glute-bridge/glute-bridge.png',
+  sidePlank: '/public/exercise/side-plank/woman-in-red-activewear-demonstrates-side-plank-exercise-on-white-background-arm-raised-video.jpg',
+  crunch: '/public/exercise/crunch/crunch.png',
 };
 
 // YouTube video IDs for exercise tutorials (embed ready)
 const VIDEOS = {
-  catCow: 'https://www.youtube.com/embed/kqnua4rHVVA',
-  threadNeedle: 'https://www.youtube.com/embed/GhEWtPGMgko',
-  shoulderSqueeze: 'https://www.youtube.com/embed/g-7ZWPCWv0U',
-  thoracicExtension: 'https://www.youtube.com/embed/LT_dFRnmdGs',
+  catCow: 'https://www.youtube.com/embed/vuyUwtHl694?si=CxmZ8ztcC2fyP-5n',
+  threadNeedle: 'https://www.youtube.com/embed/M8-bBGOilms?si=sXN0eHGGfIX6bokN',
+  shoulderSqueeze: 'https://www.youtube.com/embed/UHlhyti-RBQ?si=lz4YgJV4619E4i1x',
+  thoracicExtension: 'https://www.youtube.com/embed/2h33KDVoPII?si=-LzHQMVz_wAG75_b',
   wallAngels: 'https://www.youtube.com/embed/M_ooIhKYs7c',
   childPose: 'https://www.youtube.com/embed/2MJGg-dUKh0',
-  kneeToChest: 'https://www.youtube.com/embed/LxMGfQq93fE',
-  pelvicTilt: 'https://www.youtube.com/embed/ND0ZRTB4z8U',
-  supineTwist: 'https://www.youtube.com/embed/MVnNVLSqPo4',
+  kneeToChest: 'https://www.youtube.com/embed/o8gAyDUh2bs?si=sZFK0YCXByrUmFcV',
+  pelvicTilt: 'https://www.youtube.com/embed/44D6Xc2Fkek?si=vjq0WaSeKyqr9_t7',
+  supineTwist: 'https://www.youtube.com/embed/ezyMaQEaVaI?si=k4W9KqSIcHHhWcXP',
   birdDog: 'https://www.youtube.com/embed/wiFNA3sqjCA',
   deadBug: 'https://www.youtube.com/embed/I5xbsA71v1A',
   plank: 'https://www.youtube.com/embed/ASdvN_XEl_c',
-  gluteBridge: 'https://www.youtube.com/embed/8bbE64NuDTU',
+  gluteBridge: 'https://www.youtube.com/embed/WtilA9IJX1c?si=oNeXCvz7B_jlGJi4',
   sidePlank: 'https://www.youtube.com/embed/K2VljzCC16g',
   crunch: 'https://www.youtube.com/embed/Xyd_fa5zoEU',
 };

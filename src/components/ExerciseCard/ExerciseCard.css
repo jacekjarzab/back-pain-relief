@@ -73,7 +73,7 @@
 
 .exercise-info {
   flex: 1;
-  padding: 0 12px;
+  padding: 0 0 0 12px;
   min-width: 0;
 }
 
@@ -100,7 +100,6 @@
 }
 
 .meta-chip ion-icon {
-  font-size: 12px;
   margin-right: 4px;
 }
 
