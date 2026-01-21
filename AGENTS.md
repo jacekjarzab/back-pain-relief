@@ -62,6 +62,18 @@ npx cap open ios
 
 # Open Android project in Android Studio
 npx cap open android
+
+# Run on connected iOS device with live reload
+npx cap run ios --livereload --external
+
+# Clean iOS build artifacts
+rm -rf ios/App/build ios/App/DerivedData
+rm -rf ~/Library/Developer/Xcode/DerivedData/*
+
+# Fix Capacitor dependency issues
+npm install @capacitor/core@latest @capacitor/cli@latest
+npm install @capacitor/app@latest @capacitor/haptics@latest @capacitor/keyboard@latest
+npx cap sync ios
 ```
 
 ## Code Style Guidelines
