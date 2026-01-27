@@ -39,7 +39,6 @@ const WorkoutTimer: React.FC<WorkoutTimerProps> = ({
           if (prev <= 1) {
             setIsRunning(false);
             setIsCompleted(true);
-            onComplete?.();
             return 0;
           }
           return prev - 1;

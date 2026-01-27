@@ -1,9 +1,9 @@
 import React, { useMemo } from 'react';
-import { 
-  IonContent, 
-  IonHeader, 
-  IonPage, 
-  IonTitle, 
+import {
+  IonContent,
+  IonHeader,
+  IonPage,
+  IonTitle,
   IonToolbar,
   IonButton,
   IonIcon,
@@ -71,14 +71,14 @@ const Dashboard: React.FC = () => {
 
         <div className="dashboard-content">
           {/* Hero Section with Progress */}
-          <motion.section 
+          <motion.section
             className="hero-section"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
           >
             <div className="hero-stats">
-              <ProgressRing 
-                progress={completionPercentage} 
+              <ProgressRing
+                progress={completionPercentage}
                 size={140}
                 strokeWidth={10}
                 color={isWorkoutComplete ? 'var(--ion-color-success)' : 'var(--ion-color-primary)'}
@@ -103,16 +103,18 @@ const Dashboard: React.FC = () => {
                </div>
             </div>
 
-            {!isWorkoutComplete && (
-              <IonButton 
-                expand="block" 
-                className="start-workout-button"
-                onClick={() => history.push('/workout')}
-              >
-                <IonIcon slot="start" icon={playCircleOutline} />
-                {completedCount > 0 ? t('workout.nextExercise') : t('home.startWorkout')}
-              </IonButton>
-            )}
+             {!isWorkoutComplete && (
+               <IonButton
+                 expand="block"
+                 className="start-workout-button"
+                 onClick={() => {
+                   history.push('/workout');
+                 }}
+               >
+                 <IonIcon slot="start" icon={playCircleOutline} />
+                 {completedCount > 0 ? t('workout.nextExercise') : t('home.startWorkout')}
+               </IonButton>
+             )}
           </motion.section>
 
           {/* Daily Pro Tip */}

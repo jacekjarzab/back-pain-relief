@@ -36,11 +36,7 @@ const Workout: React.FC = () => {
   const { t } = useTranslation();
   const { todayRoutine, completeExercise, completeWorkout, preferences } = useApp();
 
-  const [currentIndex, setCurrentIndex] = useState(() => {
-    // Start from first incomplete exercise
-    const firstIncomplete = todayRoutine?.exercises.findIndex(e => !e.completed) ?? 0;
-    return Math.max(0, firstIncomplete);
-  });
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [viewMode, setViewMode] = useState<'image' | 'video'>('image');
 
   const currentExercise = todayRoutine?.exercises[currentIndex];
@@ -61,11 +57,6 @@ const Workout: React.FC = () => {
     }
 
     await completeExercise(currentExercise.exercise.id);
-
-    // Auto-advance if not last exercise
-    if (!isLastExercise) {
-      setTimeout(() => setCurrentIndex(prev => prev + 1), 500);
-    }
   };
 
   const handleFinishWorkout = async () => {
@@ -77,6 +68,7 @@ const Workout: React.FC = () => {
       }
     }
     await completeWorkout();
+    setCurrentIndex(0);
     history.push('/dashboard');
   };
 
