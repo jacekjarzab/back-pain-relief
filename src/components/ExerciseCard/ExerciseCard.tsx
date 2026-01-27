@@ -95,16 +95,16 @@ const ExerciseCard: React.FC<ExerciseCardProps> = ({
             <p className="exercise-area ion-display-flex ion-justify-content-between">
               <span>{t(`exercises.bodyArea.${exercise.bodyArea}`)}</span>
               {!completed && onComplete && (
-              <button
-                className="complete-button"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onComplete();
-                }}
-              >
-                <IonIcon icon={checkmarkCircle} />
-              </button>
-            )}
+                <button
+                  className="complete-button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onComplete();
+                  }}
+                >
+                  <IonIcon icon={checkmarkCircle} />
+                </button>
+              )}
             </p>
 
           </IonCardContent>

@@ -36,10 +36,15 @@ const Workout: React.FC = () => {
   const { t } = useTranslation();
   const { todayRoutine, completeExercise, completeWorkout, preferences } = useApp();
 
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(() => {
+    // Start from first incomplete exercise
+    const firstIncomplete = todayRoutine?.exercises.findIndex(e => !e.completed) ?? 0;
+    return Math.max(0, firstIncomplete);
+  });
   const [viewMode, setViewMode] = useState<'image' | 'video'>('image');
 
   const currentExercise = todayRoutine?.exercises[currentIndex];
+  console.log('currentExercise', currentExercise);
   const isLastExercise = currentIndex === (todayRoutine?.exercises.length ?? 0) - 1;
   const allCompleted = todayRoutine?.exercises.every(e => e.completed) ?? false;
   const { translateExercise } = useExerciseTranslation();
@@ -181,6 +186,7 @@ const Workout: React.FC = () => {
               <WorkoutTimer
                 duration={exercise.durationSeconds}
                 exerciseName={exercise.name}
+                isComplete={currentExercise.completed}
                 onComplete={handleComplete}
               />
 

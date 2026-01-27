@@ -7,6 +7,7 @@ import './WorkoutTimer.css';
 
 interface WorkoutTimerProps {
   duration: number; // in seconds
+  isComplete?: boolean;
   onComplete?: () => void;
   autoStart?: boolean;
   exerciseName?: string;
@@ -14,6 +15,7 @@ interface WorkoutTimerProps {
 
 const WorkoutTimer: React.FC<WorkoutTimerProps> = ({
   duration,
+  isComplete = false,
   onComplete,
   autoStart = false,
   exerciseName,
@@ -21,14 +23,15 @@ const WorkoutTimer: React.FC<WorkoutTimerProps> = ({
   const [timeRemaining, setTimeRemaining] = useState(duration);
   const [isRunning, setIsRunning] = useState(autoStart);
   const [isCompleted, setIsCompleted] = useState(false);
+  console.log(`WorkoutTimer: ${isComplete}`);
 
   const progress = ((duration - timeRemaining) / duration) * 100;
 
   useEffect(() => {
     setTimeRemaining(duration);
-    setIsCompleted(false);
+    setIsCompleted(isComplete);
     setIsRunning(autoStart);
-  }, [duration, autoStart]);
+  }, [duration, autoStart, isComplete]);
 
   useEffect(() => {
     let interval: NodeJS.Timeout | null = null;
