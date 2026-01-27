@@ -44,7 +44,6 @@ const Workout: React.FC = () => {
   const [viewMode, setViewMode] = useState<'image' | 'video'>('image');
 
   const currentExercise = todayRoutine?.exercises[currentIndex];
-  console.log('currentExercise', currentExercise);
   const isLastExercise = currentIndex === (todayRoutine?.exercises.length ?? 0) - 1;
   const allCompleted = todayRoutine?.exercises.every(e => e.completed) ?? false;
   const { translateExercise } = useExerciseTranslation();

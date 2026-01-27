@@ -23,8 +23,6 @@ const WorkoutTimer: React.FC<WorkoutTimerProps> = ({
   const [timeRemaining, setTimeRemaining] = useState(duration);
   const [isRunning, setIsRunning] = useState(autoStart);
   const [isCompleted, setIsCompleted] = useState(false);
-  console.log(`WorkoutTimer: ${isComplete}`);
-
   const progress = ((duration - timeRemaining) / duration) * 100;
 
   useEffect(() => {
