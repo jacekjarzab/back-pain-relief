@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { IonButton, IonIcon } from '@ionic/react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { playOutline, pauseOutline, refreshOutline, checkmarkOutline } from 'ionicons/icons';
@@ -25,11 +25,25 @@ const WorkoutTimer: React.FC<WorkoutTimerProps> = ({
   const [isCompleted, setIsCompleted] = useState(false);
   const progress = ((duration - timeRemaining) / duration) * 100;
 
+  const onCompleteRef = useRef(onComplete);
+  useEffect(() => {
+    onCompleteRef.current = onComplete;
+  }, [onComplete]);
+
+  const completionTriggeredRef = useRef(isComplete);
+
   useEffect(() => {
     setTimeRemaining(duration);
     setIsCompleted(isComplete);
     setIsRunning(autoStart);
+    completionTriggeredRef.current = isComplete;
   }, [duration, autoStart, isComplete]);
+
+  const triggerCompletion = useCallback(() => {
+    if (completionTriggeredRef.current) return;
+    completionTriggeredRef.current = true;
+    onCompleteRef.current?.();
+  }, []);
 
   useEffect(() => {
     let interval: NodeJS.Timeout | null = null;
@@ -40,6 +54,7 @@ const WorkoutTimer: React.FC<WorkoutTimerProps> = ({
           if (prev <= 1) {
             setIsRunning(false);
             setIsCompleted(true);
+            triggerCompletion();
             return 0;
           }
           return prev - 1;
@@ -50,7 +65,7 @@ const WorkoutTimer: React.FC<WorkoutTimerProps> = ({
     return () => {
       if (interval) clearInterval(interval);
     };
-  }, [isRunning, timeRemaining, onComplete]);
+  }, [isRunning, timeRemaining, triggerCompletion]);
 
   const toggleTimer = useCallback(() => {
     if (isCompleted) return;
@@ -61,6 +76,7 @@ const WorkoutTimer: React.FC<WorkoutTimerProps> = ({
     setTimeRemaining(duration);
     setIsRunning(false);
     setIsCompleted(false);
+    completionTriggeredRef.current = false;
   }, [duration]);
 
   const formatTime = (seconds: number): string => {
@@ -129,7 +145,7 @@ const WorkoutTimer: React.FC<WorkoutTimerProps> = ({
           onClick={() => {
             setIsCompleted(true);
             setIsRunning(false);
-            onComplete?.();
+            triggerCompletion();
           }}
           disabled={isCompleted}
           color="success"
@@ -142,4 +158,3 @@ const WorkoutTimer: React.FC<WorkoutTimerProps> = ({
 };
 
 export default WorkoutTimer;
-
