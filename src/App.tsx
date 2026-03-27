@@ -65,8 +65,8 @@ const App: React.FC = () => {
 
   return (
     <IonApp>
-      <AppProvider>
-        <IonReactRouter>
+      <IonReactRouter>
+        <AppProvider>
           <IonTabs>
             <IonRouterOutlet>
               <Route exact path="/dashboard">
@@ -108,8 +108,8 @@ const App: React.FC = () => {
               </IonTabButton>
             </IonTabBar>
           </IonTabs>
-        </IonReactRouter>
-      </AppProvider>
+        </AppProvider>
+      </IonReactRouter>
     </IonApp>
   );
 };
