@@ -3,25 +3,25 @@ import { Exercise, ProTip } from '../models/types';
 // Real exercise images from Unsplash - high quality fitness photography
 const IMAGES = {
   // Upper Back
-  catCow: '/public/exercise/cat-cow/Fitness_Gif-1500x1000-catcow-5c5c85cac9e77c0001566641.gif',
-  threadNeedle: '/public/exercise/thread-needle/Thread-the-Needle-Pose-for-Pose-Pge-e1574899766929.jpeg',
-  shoulderSqueeze: '/public/exercise/shoulder-squeeze/scapular-squeeze-carole-rest.png',
-  thoracicExtension: '/public/exercise/thoracic-extension/thoracic-extension.png',
-  wallAngels: '/public/exercise/wall-angels/maxresdefault.jpg',
+  catCow: '/exercise/cat-cow/Fitness_Gif-1500x1000-catcow-5c5c85cac9e77c0001566641.gif',
+  threadNeedle: '/exercise/thread-needle/Thread-the-Needle-Pose-for-Pose-Pge-e1574899766929.jpeg',
+  shoulderSqueeze: '/exercise/shoulder-squeeze/scapular-squeeze-carole-rest.png',
+  thoracicExtension: '/exercise/thoracic-extension/thoracic-extension.png',
+  wallAngels: '/exercise/wall-angels/maxresdefault.jpg',
 
   // Lower Back
-  childPose: '/public/exercise/child-pose/child-pose.png',
-  kneeToChest: '/public/exercise/knee-to-chest/istockphoto-1134840963-612x612.jpg',
-  pelvicTilt: '/public/exercise/pelvic-tilt/pelvic-tilt.png',
-  supineTwist: '/public/exercise/supine-twist/Verywell-20-4023748-SpinalTwist01-1729-5995b536845b340010c016cf.gif',
-  birdDog: '/public/exercise/bird-dog/bird-dog-exercise-1674234348.avif',
+  childPose: '/exercise/child-pose/child-pose.png',
+  kneeToChest: '/exercise/knee-to-chest/istockphoto-1134840963-612x612.jpg',
+  pelvicTilt: '/exercise/pelvic-tilt/pelvic-tilt.png',
+  supineTwist: '/exercise/supine-twist/Verywell-20-4023748-SpinalTwist01-1729-5995b536845b340010c016cf.gif',
+  birdDog: '/exercise/bird-dog/bird-dog-exercise-1674234348.avif',
 
   // Core
-  deadBug: '/public/exercise/dead-bug/dead-bug.webp',
-  plank: '/public/exercise/plank/photo-1566241142559-40e1dab266c6.jpeg',
-  gluteBridge: '/public/exercise/glute-bridge/glute-bridge.png',
-  sidePlank: '/public/exercise/side-plank/woman-in-red-activewear-demonstrates-side-plank-exercise-on-white-background-arm-raised-video.jpg',
-  crunch: '/public/exercise/crunch/crunch.png',
+  deadBug: '/exercise/dead-bug/dead-bug.webp',
+  plank: '/exercise/plank/photo-1566241142559-40e1dab266c6.jpeg',
+  gluteBridge: '/exercise/glute-bridge/glute-bridge.png',
+  sidePlank: '/exercise/side-plank/woman-in-red-activewear-demonstrates-side-plank-exercise-on-white-background-arm-raised-video.jpg',
+  crunch: '/exercise/crunch/crunch.png',
 };
 
 // YouTube video IDs for exercise tutorials (embed ready)

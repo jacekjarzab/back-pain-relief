@@ -1,4 +1,6 @@
+import type { PluginListenerHandle } from '@capacitor/core';
 import React, { createContext, useContext, useEffect, useState, useCallback } from 'react';
+import { useIonRouter } from '@ionic/react';
 import dayjs from 'dayjs';
 import i18n from 'i18next';
 import {
@@ -35,8 +37,12 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [todayRoutine, setTodayRoutine] = useState<DailyRoutine | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  const router = useIonRouter();
+
   // Initialize app state from storage
   useEffect(() => {
+    let notificationHandle: PluginListenerHandle | null = null;
+
     const initializeApp = async () => {
       try {
         await storageService.init();
@@ -70,9 +76,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         }
 
         // Set up notification click listener
-        notificationService.addListeners(() => {
-          // Navigate to workout when notification is tapped
-          window.location.href = '/workout';
+        notificationHandle = await notificationService.addListeners(() => {
+          router.push('/workout');
         });
       } catch (error) {
         console.error('Failed to initialize app:', error);
@@ -82,7 +87,11 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     };
 
     initializeApp();
-  }, []);
+
+    return () => {
+      notificationHandle?.remove();
+    };
+  }, [router]);
 
   // Complete a single exercise
   const completeExercise = useCallback(async (exerciseId: string) => {

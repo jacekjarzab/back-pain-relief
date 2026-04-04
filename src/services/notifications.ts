@@ -1,5 +1,5 @@
 import { LocalNotifications, ScheduleOptions, PendingResult } from '@capacitor/local-notifications';
-import { Capacitor } from '@capacitor/core';
+import { Capacitor, type PluginListenerHandle } from '@capacitor/core';
 
 // Notification IDs
 const DAILY_REMINDER_ID = 1;
@@ -155,12 +155,12 @@ class NotificationService {
   /**
    * Add listeners for notification events
    */
-  async addListeners(onNotificationClick: () => void): Promise<void> {
+  async addListeners(onNotificationClick: () => void): Promise<PluginListenerHandle | null> {
     if (!this.isAvailable) {
-      return;
+      return null;
     }
 
-    await LocalNotifications.addListener('localNotificationActionPerformed', () => {
+    return LocalNotifications.addListener('localNotificationActionPerformed', () => {
       onNotificationClick();
     });
   }
