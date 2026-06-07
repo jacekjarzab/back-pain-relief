@@ -31,6 +31,7 @@ import {
 
 import { useApp } from '../../context/AppContext';
 import { useTranslation } from 'react-i18next';
+import CloudSyncBadge from '../../components/CloudSyncBadge';
 import { useTranslatedExercise } from '../../hooks/useTranslatedExercises';
 import './ExerciseDetail.css';
 
@@ -84,6 +85,9 @@ const ExerciseDetail: React.FC = () => {
         <IonToolbar>
           <IonButtons slot="start">
             <IonBackButton defaultHref="/dashboard" icon={chevronBackOutline} text="" />
+          </IonButtons>
+          <IonButtons slot="end">
+            <CloudSyncBadge />
           </IonButtons>
         </IonToolbar>
       </IonHeader>
@@ -230,4 +234,3 @@ const ExerciseDetail: React.FC = () => {
 };
 
 export default ExerciseDetail;
-

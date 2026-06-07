@@ -43,6 +43,38 @@
   margin: 0;
 }
 
+.cloud-sync-status {
+  --min-height: 72px;
+}
+
+.cloud-sync-status p {
+  word-break: break-word;
+}
+
+.settings-error {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 16px;
+  margin-top: 12px;
+  background: rgba(var(--ion-color-danger-rgb), 0.08);
+  border-radius: 12px;
+  border-left: 3px solid var(--ion-color-danger);
+}
+
+.settings-error ion-icon {
+  font-size: 18px;
+  color: var(--ion-color-danger);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.settings-error ion-note {
+  font-size: 13px;
+  color: var(--ion-color-medium);
+  line-height: 1.4;
+}
+
 .settings-note {
   display: flex;
   align-items: flex-start;
@@ -139,4 +171,3 @@
   color: var(--ion-color-medium);
   line-height: 1.4;
 }
-

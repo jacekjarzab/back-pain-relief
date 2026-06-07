@@ -27,6 +27,7 @@ import { Haptics, ImpactStyle } from '@capacitor/haptics';
 
 import { useApp } from '../../context/AppContext';
 import { useTranslation } from 'react-i18next';
+import CloudSyncBadge from '../../components/CloudSyncBadge';
 import { useExerciseTranslation } from '../../hooks/useTranslatedExercises';
 import WorkoutTimer from '../../components/WorkoutTimer';
 import './Workout.css';
@@ -109,6 +110,9 @@ const Workout: React.FC = () => {
           <IonTitle>
             {currentIndex + 1} / {todayRoutine.exercises.length}
           </IonTitle>
+          <IonButtons slot="end">
+            <CloudSyncBadge />
+          </IonButtons>
         </IonToolbar>
       </IonHeader>
 
@@ -225,4 +229,3 @@ const Workout: React.FC = () => {
 };
 
 export default Workout;
-

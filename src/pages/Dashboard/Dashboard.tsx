@@ -8,6 +8,7 @@ import {
   IonButton,
   IonIcon,
   IonSpinner,
+  IonButtons,
 } from '@ionic/react';
 import { useHistory } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -19,6 +20,7 @@ import { getRandomProTip } from '../../data/exercises';
 import { useTranslation } from 'react-i18next';
 import ProgressRing from '../../components/ProgressRing';
 import StreakBadge from '../../components/StreakBadge';
+import CloudSyncBadge from '../../components/CloudSyncBadge';
 import ExerciseCard from '../../components/ExerciseCard';
 import ProTipCard from '../../components/ProTipCard';
 
@@ -57,6 +59,9 @@ const Dashboard: React.FC = () => {
       <IonHeader className="ion-no-border">
         <IonToolbar>
           <IonTitle>{t('home.welcome')}</IonTitle>
+          <IonButtons slot="end">
+            <CloudSyncBadge />
+          </IonButtons>
         </IonToolbar>
       </IonHeader>
 
@@ -150,4 +155,3 @@ const Dashboard: React.FC = () => {
 };
 
 export default Dashboard;
-

@@ -8,6 +8,7 @@ import {
   IonCard,
   IonCardContent,
   IonIcon,
+  IonButtons,
 } from '@ionic/react';
 import { motion } from 'framer-motion';
 import dayjs from 'dayjs';
@@ -22,6 +23,7 @@ import {
 import { useApp } from '../../context/AppContext';
 import { useTranslation } from 'react-i18next';
 import StreakBadge from '../../components/StreakBadge';
+import CloudSyncBadge from '../../components/CloudSyncBadge';
 import './Progress.css';
 
 const Progress: React.FC = () => {
@@ -107,6 +109,9 @@ const Progress: React.FC = () => {
       <IonHeader className="ion-no-border">
         <IonToolbar>
           <IonTitle>{t('progress.title')}</IonTitle>
+          <IonButtons slot="end">
+            <CloudSyncBadge />
+          </IonButtons>
         </IonToolbar>
       </IonHeader>
 
@@ -199,4 +204,3 @@ const Progress: React.FC = () => {
 };
 
 export default Progress;
-
