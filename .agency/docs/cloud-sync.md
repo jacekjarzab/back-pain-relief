@@ -12,7 +12,7 @@ Goal: add optional Google Drive cloud backup/sync while keeping offline-first lo
 - [x] Add automatic push/pull sync on app start and after data changes.
 - [x] Add conflict handling with a clear merge rule for v1.
 - [x] Expose cloud sync controls in Settings.
-- [ ] Add tests for serialization, restore, and conflict cases.
+- [x] Add tests for serialization, restore, and conflict cases.
 - [x] Verify web PWA and Capacitor mobile behavior.
 
 ## Initial Decisions
