@@ -1,4 +1,4 @@
-import { Redirect, Route } from 'react-router-dom';
+import { Route, useLocation } from 'react-router-dom';
 import {
   IonApp,
   IonIcon,
@@ -22,6 +22,7 @@ import Workout from './pages/Workout';
 import ExerciseDetail from './pages/ExerciseDetail';
 import Progress from './pages/Progress';
 import Settings from './pages/Settings';
+import Splash from './pages/Splash';
 
 /* Context */
 import { AppProvider } from './context/AppContext';
@@ -60,54 +61,65 @@ setupIonicReact({
   mode: 'ios', // Use iOS design for consistent look across platforms
 });
 
-const App: React.FC = () => {
+const AppRoutes: React.FC = () => {
   const { t } = useTranslation();
+  const location = useLocation();
+  const isSplashRoute = location.pathname === '/';
 
+  return isSplashRoute ? (
+    <IonRouterOutlet>
+      <Route exact path="/">
+        <Splash />
+      </Route>
+    </IonRouterOutlet>
+  ) : (
+    <IonTabs>
+      <IonRouterOutlet>
+        <Route exact path="/dashboard">
+          <Dashboard />
+        </Route>
+        <Route exact path="/workout">
+          <Workout />
+        </Route>
+        <Route exact path="/exercise/:id">
+          <ExerciseDetail />
+        </Route>
+        <Route exact path="/progress">
+          <Progress />
+        </Route>
+        <Route exact path="/settings">
+          <Settings />
+        </Route>
+      </IonRouterOutlet>
+
+      <IonTabBar slot="bottom">
+        <IonTabButton tab="dashboard" href="/dashboard">
+          <IonIcon icon={homeOutline} />
+          <IonLabel>{t('navigation.home')}</IonLabel>
+        </IonTabButton>
+        <IonTabButton tab="workout" href="/workout">
+          <IonIcon icon={fitnessOutline} />
+          <IonLabel>{t('navigation.workout')}</IonLabel>
+        </IonTabButton>
+        <IonTabButton tab="progress" href="/progress">
+          <IonIcon icon={statsChartOutline} />
+          <IonLabel>{t('navigation.progress')}</IonLabel>
+        </IonTabButton>
+        <IonTabButton tab="settings" href="/settings">
+          <IonIcon icon={settingsOutline} />
+          <IonLabel>{t('navigation.settings')}</IonLabel>
+        </IonTabButton>
+      </IonTabBar>
+    </IonTabs>
+  );
+};
+
+const App: React.FC = () => {
   return (
     <IonApp>
       <IonReactRouter>
         <AppProvider>
-          <IonTabs>
-            <IonRouterOutlet>
-              <Route exact path="/dashboard">
-                <Dashboard />
-              </Route>
-              <Route exact path="/workout">
-                <Workout />
-              </Route>
-              <Route exact path="/exercise/:id">
-                <ExerciseDetail />
-              </Route>
-              <Route exact path="/progress">
-                <Progress />
-              </Route>
-              <Route exact path="/settings">
-                <Settings />
-              </Route>
-              <Route exact path="/">
-                <Redirect to="/dashboard" />
-              </Route>
-            </IonRouterOutlet>
-
-            <IonTabBar slot="bottom">
-              <IonTabButton tab="dashboard" href="/dashboard">
-                <IonIcon icon={homeOutline} />
-                <IonLabel>{t('navigation.home')}</IonLabel>
-              </IonTabButton>
-              <IonTabButton tab="workout" href="/workout">
-                <IonIcon icon={fitnessOutline} />
-                <IonLabel>{t('navigation.workout')}</IonLabel>
-              </IonTabButton>
-              <IonTabButton tab="progress" href="/progress">
-                <IonIcon icon={statsChartOutline} />
-                <IonLabel>{t('navigation.progress')}</IonLabel>
-              </IonTabButton>
-              <IonTabButton tab="settings" href="/settings">
-                <IonIcon icon={settingsOutline} />
-                <IonLabel>{t('navigation.settings')}</IonLabel>
-              </IonTabButton>
-            </IonTabBar>
-          </IonTabs>
+          <AppRoutes />
         </AppProvider>
       </IonReactRouter>
     </IonApp>

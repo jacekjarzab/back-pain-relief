@@ -114,6 +114,17 @@
     "noRoutine": "Brak wygenerowanej rutyny",
     "generateRoutine": "Wygeneruj rutynę"
   },
+  "splash": {
+    "kicker": "Codzienna opieka nad plecami",
+    "title": "Poczuj się lepiej w kilka minut dziennie.",
+    "subtitle": "Otwórz szybką rutynę, utrzymuj passę i wracaj w każdej chwili z ekranu głównego.",
+    "featuresLabel": "Najważniejsze informacje",
+    "featureRoutine": "Prowadzone codzienne rutyny",
+    "featureOffline": "Działa offline po pierwszym uruchomieniu",
+    "featureSync": "Opcjonalna kopia w Google Drive",
+    "enterApp": "Wejdź do aplikacji",
+    "note": "Dodaj ją do ekranu głównego, aby mieć najszybszy dostęp."
+  },
   "workout": {
     "title": "Trening",
     "exercise": "Ćwiczenie",

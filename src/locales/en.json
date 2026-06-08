@@ -114,6 +114,17 @@
     "noRoutine": "No routine generated yet",
     "generateRoutine": "Generate Routine"
   },
+  "splash": {
+    "kicker": "Daily back care",
+    "title": "Move better in a few minutes a day.",
+    "subtitle": "Open your quick routine, keep your streak, and come back anytime from your home screen.",
+    "featuresLabel": "Highlights",
+    "featureRoutine": "Guided daily routines",
+    "featureOffline": "Works offline after first load",
+    "featureSync": "Optional Google Drive backup",
+    "enterApp": "Enter app",
+    "note": "Install it to your home screen for the fastest access."
+  },
   "workout": {
     "title": "Workout",
     "exercise": "Exercise",

@@ -2,7 +2,7 @@
   "name": "Back Pain Relief",
   "short_name": "Back Relief",
   "description": "Daily back care workouts and reminders that work on mobile and desktop.",
-  "id": "/dashboard",
+  "id": "/",
   "icons": [
     {
       "src": "/icons/icon-192.png",
@@ -28,7 +28,7 @@
       "purpose": "maskable"
     }
   ],
-  "start_url": "/dashboard",
+  "start_url": "/",
   "scope": "/",
   "display": "standalone",
   "display_override": ["standalone"],

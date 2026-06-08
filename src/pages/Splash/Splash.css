@@ -1,0 +1,139 @@
+.splash-page {
+  --background: radial-gradient(circle at top, rgba(var(--ion-color-primary-rgb), 0.22) 0%, transparent 38%),
+    linear-gradient(180deg, #0f172a 0%, #111827 100%);
+  color: #f8fafc;
+}
+
+.splash-shell {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 12px 20px 16px;
+  max-width: 440px;
+  margin: 0 auto;
+}
+
+.splash-hero {
+  padding-top: 4px;
+}
+
+.splash-badge {
+  width: 60px;
+  height: 60px;
+  display: grid;
+  place-items: center;
+  border-radius: 18px;
+  background: rgba(var(--ion-color-primary-rgb), 0.16);
+  color: #f8fafc;
+  font-size: 28px;
+  margin-bottom: 14px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+}
+
+.splash-kicker {
+  margin: 0 0 8px;
+  color: rgba(248, 250, 252, 0.78);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.splash-hero h1 {
+  margin: 0;
+  font-size: clamp(2rem, 7vw, 3rem);
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+  color: #f8fafc;
+}
+
+.splash-copy {
+  margin: 12px 0 0;
+  font-size: 0.98rem;
+  line-height: 1.45;
+  color: rgba(248, 250, 252, 0.84);
+  max-width: 30ch;
+}
+
+.splash-features {
+  display: grid;
+  gap: 10px;
+}
+
+.splash-feature {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 16px;
+  background: rgba(15, 23, 42, 0.68);
+  border: 1px solid rgba(148, 163, 184, 0.14);
+  backdrop-filter: blur(12px);
+  color: #f8fafc;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.splash-feature ion-icon {
+  font-size: 20px;
+  color: var(--ion-color-primary);
+  flex-shrink: 0;
+}
+
+.splash-feature span {
+  font-size: 0.94rem;
+  font-weight: 500;
+}
+
+.splash-actions {
+  padding-bottom: calc(env(safe-area-inset-bottom, 0) + 2px);
+}
+
+.splash-note {
+  margin: 10px 0 0;
+  text-align: center;
+  color: rgba(248, 250, 252, 0.74);
+  font-size: 0.84rem;
+  line-height: 1.35;
+}
+
+.splash-actions ion-button {
+  --background: linear-gradient(135deg, var(--ion-color-primary) 0%, var(--ion-color-primary-shade) 100%);
+  --box-shadow: 0 10px 24px rgba(var(--ion-color-primary-rgb), 0.28);
+  height: 50px;
+}
+
+@media (max-height: 700px) {
+  .splash-shell {
+    gap: 14px;
+    padding-top: 8px;
+    padding-bottom: 10px;
+  }
+
+  .splash-hero {
+    padding-top: 0;
+  }
+
+  .splash-badge {
+    width: 54px;
+    height: 54px;
+    margin-bottom: 10px;
+  }
+
+  .splash-copy {
+    margin-top: 10px;
+  }
+
+  .splash-features {
+    gap: 8px;
+  }
+
+  .splash-feature {
+    padding: 10px 12px;
+  }
+
+  .splash-note {
+    margin-top: 8px;
+  }
+}
