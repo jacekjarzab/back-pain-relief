@@ -10,7 +10,7 @@ Goal: deploy the app as a static PWA only, with no native store release for now.
 - [x] Upload or connect the `dist/` output to the hosting provider.
 - [x] Verify `public/manifest.json` and service worker assets are served from the deployed origin.
 - [x] Confirm the app opens at `/dashboard` and other client routes resolve after refresh.
-- [ ] Test install flow on Android Chrome.
+- [x] Test install flow on Android Chrome.
 - [x] Test Add to Home Screen flow on iPhone Safari.
 - [x] Test offline relaunch after the first visit.
 - [x] Verify Google OAuth settings allow the production origin for cloud sync.
