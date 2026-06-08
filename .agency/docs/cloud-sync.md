@@ -4,14 +4,14 @@ Goal: add optional Google Drive cloud backup/sync while keeping offline-first lo
 
 ## Checklist
 
-- [ ] Define a versioned snapshot schema for sync payloads.
-- [ ] Add a sync service that can export/import local app state.
-- [ ] Add Google Drive auth/connect flow.
-- [ ] Persist one app-owned backup file in Google Drive.
-- [ ] Implement manual backup and restore actions.
-- [ ] Add automatic push/pull sync on app start and after data changes.
-- [ ] Add conflict handling with a clear merge rule for v1.
-- [ ] Expose cloud sync controls in Settings.
+- [x] Define a versioned snapshot schema for sync payloads.
+- [x] Add a sync service that can export/import local app state.
+- [x] Add Google Drive auth/connect flow.
+- [x] Persist one app-owned backup file in Google Drive.
+- [x] Implement manual backup and restore actions.
+- [x] Add automatic push/pull sync on app start and after data changes.
+- [x] Add conflict handling with a clear merge rule for v1.
+- [x] Expose cloud sync controls in Settings.
 - [ ] Add tests for serialization, restore, and conflict cases.
 - [ ] Verify web PWA and Capacitor mobile behavior.
 
