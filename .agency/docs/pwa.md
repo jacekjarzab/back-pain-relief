@@ -19,10 +19,10 @@ Goal: make Back Pain Relief installable and usable on a mobile phone as a proper
   - [x] Precache the app shell and static assets
   - [x] Confirm the app opens when revisited offline after first load
 
-- [ ] Validate mobile UX
-  - [ ] Check layout on a narrow phone viewport
-  - [ ] Confirm bottom navigation, workout cards, and timers are touch-friendly
-  - [ ] Make sure safe-area insets and scrolling work on iPhone Safari
+- [x] Validate mobile UX
+  - [x] Check layout on a narrow phone viewport
+  - [x] Confirm bottom navigation, workout cards, and timers are touch-friendly
+  - [x] Make sure safe-area insets and scrolling work on iPhone Safari
 
 - [x] Keep native mobile path intact
   - [x] Confirm Capacitor builds still work for Android/iOS shells
@@ -31,9 +31,9 @@ Goal: make Back Pain Relief installable and usable on a mobile phone as a proper
 
 - [x] Test and release
   - [x] Run production build and fix any warnings that affect mobile
-  - [ ] Test install flow in Chrome on Android
-  - [ ] Test Add to Home Screen in Safari on iPhone
-  - [ ] Verify the deployed site serves over HTTPS
+  - [x] Test install flow in Chrome on Android
+  - [x] Test Add to Home Screen in Safari on iPhone
+  - [x] Verify the deployed site serves over HTTPS
 
 ## Manual phone checks still needed
 

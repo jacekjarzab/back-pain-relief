@@ -639,9 +639,13 @@ const Settings: React.FC = () => {
               <>
                 <IonItem>
                   <IonIcon icon={linkOutline} slot="start" color="success" />
-                <IonLabel>
-                  <h2>{t('settings.connectedAccount')}</h2>
-                  <p>{driveConnection.user.email || driveConnection.user.name || t('settings.googleDriveConnected')}</p>
+                  <IonLabel>
+                    <h2>{t('settings.connectedAccount')}</h2>
+                    <p>
+                      {t('settings.googleDriveConnected', {
+                        account: driveConnection.user.email || driveConnection.user.name || t('settings.googleDrive'),
+                      })}
+                    </p>
                   </IonLabel>
                 </IonItem>
 

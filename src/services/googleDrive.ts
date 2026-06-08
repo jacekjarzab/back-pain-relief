@@ -164,10 +164,9 @@ const downloadBackupSnapshot = async (accessToken: string, fileId: string): Prom
 
 const uploadBackupSnapshot = async (accessToken: string, snapshotJson: string, fileId?: string | null): Promise<string> => {
   const boundary = `back-pain-relief-${Date.now()}`;
-  const metadata = {
-    name: BACKUP_FILE_NAME,
-    parents: ['appDataFolder'],
-  };
+  const metadata = fileId
+    ? { name: BACKUP_FILE_NAME }
+    : { name: BACKUP_FILE_NAME, parents: ['appDataFolder'] };
 
   const body = [
     `--${boundary}`,
