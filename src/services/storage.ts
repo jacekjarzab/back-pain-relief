@@ -75,6 +75,11 @@ class StorageService {
     await storage.set(KEYS.TODAY_ROUTINE, routine);
   }
 
+  async clearTodayRoutine(): Promise<void> {
+    const storage = await this.getStorage();
+    await storage.remove(KEYS.TODAY_ROUTINE);
+  }
+
   // Routine history
   async getRoutineHistory(): Promise<DailyRoutine[]> {
     const storage = await this.getStorage();
@@ -87,6 +92,12 @@ class StorageService {
     // Keep last 30 days of history
     const updated = [routine, ...history].slice(0, 30);
     const storage = await this.getStorage();
+    await storage.set(KEYS.ROUTINES, updated);
+  }
+
+  async saveRoutineHistory(history: DailyRoutine[]): Promise<void> {
+    const storage = await this.getStorage();
+    const updated = history.slice(0, 30);
     await storage.set(KEYS.ROUTINES, updated);
   }
 
@@ -107,4 +118,3 @@ class StorageService {
 
 // Export singleton instance
 export const storageService = new StorageService();
-

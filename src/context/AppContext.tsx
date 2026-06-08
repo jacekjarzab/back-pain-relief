@@ -14,6 +14,7 @@ import {
 import { storageService } from '../services/storage';
 import { generateTodayRoutine, shouldRegenerateRoutine } from '../utils/routineGenerator';
 import { notificationService } from '../services/notifications';
+import { getGoogleDriveConnection, syncGoogleDriveBackup } from '../services/googleDrive';
 
 interface AppContextType {
   progress: UserProgress;
@@ -27,6 +28,7 @@ interface AppContextType {
   updatePreferences: (prefs: Partial<UserPreferences>) => Promise<void>;
   refreshRoutine: () => Promise<void>;
   resetProgress: () => Promise<void>;
+  refreshFromStorage: () => Promise<void>;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -39,41 +41,64 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
   const router = useIonRouter();
 
+  const loadPersistedState = useCallback(async (showLoading = false) => {
+    if (showLoading) {
+      setIsLoading(true);
+    }
+
+    try {
+      await storageService.init();
+
+      const [savedProgress, savedPreferences, savedRoutine] = await Promise.all([
+        storageService.getProgress(),
+        storageService.getPreferences(),
+        storageService.getTodayRoutine(),
+      ]);
+
+      setProgress(savedProgress);
+      setPreferences(savedPreferences);
+
+      if (savedPreferences.language) {
+        await i18n.changeLanguage(savedPreferences.language);
+      }
+
+      if (shouldRegenerateRoutine(savedRoutine)) {
+        const newRoutine = generateTodayRoutine(savedPreferences);
+        await storageService.saveTodayRoutine(newRoutine);
+        setTodayRoutine(newRoutine);
+      } else {
+        setTodayRoutine(savedRoutine);
+      }
+
+      if (savedPreferences.reminderEnabled && savedPreferences.reminderTime) {
+        await notificationService.scheduleDailyReminder(savedPreferences.reminderTime);
+      }
+
+      if (showLoading) {
+        const driveConnection = getGoogleDriveConnection();
+        if (driveConnection) {
+          const syncResult = await syncGoogleDriveBackup(driveConnection);
+          if (syncResult.action === 'downloaded') {
+            await loadPersistedState(false);
+          }
+        }
+      }
+    } catch (error) {
+      console.error('Failed to load persisted app state:', error);
+    } finally {
+      if (showLoading) {
+        setIsLoading(false);
+      }
+    }
+  }, []);
+
   // Initialize app state from storage
   useEffect(() => {
     let notificationHandle: PluginListenerHandle | null = null;
 
     const initializeApp = async () => {
       try {
-        await storageService.init();
-
-        const [savedProgress, savedPreferences, savedRoutine] = await Promise.all([
-          storageService.getProgress(),
-          storageService.getPreferences(),
-          storageService.getTodayRoutine(),
-        ]);
-
-        setProgress(savedProgress);
-        setPreferences(savedPreferences);
-
-        // Initialize language
-        if (savedPreferences.language) {
-          await i18n.changeLanguage(savedPreferences.language);
-        }
-
-        // Check if we need a new routine for today
-        if (shouldRegenerateRoutine(savedRoutine)) {
-          const newRoutine = generateTodayRoutine(savedPreferences);
-          await storageService.saveTodayRoutine(newRoutine);
-          setTodayRoutine(newRoutine);
-        } else {
-          setTodayRoutine(savedRoutine);
-        }
-
-        // Re-schedule notification if enabled (in case app was updated)
-        if (savedPreferences.reminderEnabled && savedPreferences.reminderTime) {
-          await notificationService.scheduleDailyReminder(savedPreferences.reminderTime);
-        }
+        await loadPersistedState(true);
 
         // Set up notification click listener
         notificationHandle = await notificationService.addListeners(() => {
@@ -91,7 +116,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     return () => {
       notificationHandle?.remove();
     };
-  }, [router]);
+  }, [loadPersistedState, router]);
 
   // Complete a single exercise
   const completeExercise = useCallback(async (exerciseId: string) => {
@@ -191,6 +216,10 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     await storageService.saveTodayRoutine(newRoutine);
   }, [preferences]);
 
+  const refreshFromStorage = useCallback(async () => {
+    await loadPersistedState(false);
+  }, [loadPersistedState]);
+
   return (
     <AppContext.Provider value={{
       progress,
@@ -202,6 +231,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       updatePreferences,
       refreshRoutine,
       resetProgress,
+      refreshFromStorage,
     }}>
       {children}
     </AppContext.Provider>
@@ -215,4 +245,3 @@ export const useApp = (): AppContextType => {
   }
   return context;
 };
-
