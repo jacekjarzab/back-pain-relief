@@ -194,7 +194,7 @@ const Settings: React.FC = () => {
           role: 'cancel',
         },
         {
-          text: t('settings.delete'),
+          text: t('common.delete'),
           role: 'destructive',
           handler: async () => {
             await resetProgress();
