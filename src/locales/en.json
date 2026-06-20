@@ -16,7 +16,8 @@
     "error": "Error",
     "success": "Success",
     "warning": "Warning",
-    "info": "Information"
+    "info": "Information",
+    "offline": "Offline"
   },
   "navigation": {
     "home": "Home",
@@ -140,7 +141,9 @@
     "viewResults": "View Results",
     "startOver": "Start Over",
     "image": "Image",
-    "video": "Video"
+    "video": "Video",
+    "videoUnavailableTitle": "Offline mode",
+    "videoUnavailableDescription": "This video is available only when you're online."
   },
   "progress": {
     "title": "Progress",
