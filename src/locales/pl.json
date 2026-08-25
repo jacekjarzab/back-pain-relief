@@ -16,7 +16,8 @@
     "error": "Błąd",
     "success": "Sukces",
     "warning": "Ostrzeżenie",
-    "info": "Informacja"
+    "info": "Informacja",
+    "offline": "Offline"
   },
   "navigation": {
     "home": "Strona główna",
@@ -140,7 +141,9 @@
     "viewResults": "Zobacz wyniki",
     "startOver": "Zacznij od nowa",
     "image": "Obraz",
-    "video": "Wideo"
+    "video": "Wideo",
+    "videoUnavailableTitle": "Tryb offline",
+    "videoUnavailableDescription": "To wideo jest dostępne tylko po przejściu online."
   },
   "progress": {
     "title": "Postęp",

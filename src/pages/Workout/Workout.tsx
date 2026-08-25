@@ -22,13 +22,16 @@ import {
   informationCircleOutline,
   videocamOutline,
   imageOutline,
+  cloudOfflineOutline,
 } from 'ionicons/icons';
 import { Haptics, ImpactStyle } from '@capacitor/haptics';
 
 import { useApp } from '../../context/AppContext';
 import { useTranslation } from 'react-i18next';
 import CloudSyncBadge from '../../components/CloudSyncBadge';
+import OfflineBadge from '../../components/OfflineBadge';
 import { useExerciseTranslation } from '../../hooks/useTranslatedExercises';
+import useOnlineStatus from '../../hooks/useOnlineStatus';
 import WorkoutTimer from '../../components/WorkoutTimer';
 import './Workout.css';
 
@@ -36,6 +39,7 @@ const Workout: React.FC = () => {
   const history = useHistory();
   const { t } = useTranslation();
   const { todayRoutine, completeExercise, completeWorkout, preferences } = useApp();
+  const isOnline = useOnlineStatus();
 
   const [currentIndex, setCurrentIndex] = useState(() => {
     // Start from first incomplete exercise
@@ -99,6 +103,7 @@ const Workout: React.FC = () => {
   }
 
   const exercise = translateExercise(currentExercise.exercise);
+  const isVideoUnavailable = viewMode === 'video' && !isOnline && !!exercise.videoUrl;
 
   return (
     <IonPage>
@@ -111,6 +116,7 @@ const Workout: React.FC = () => {
             {currentIndex + 1} / {todayRoutine.exercises.length}
           </IonTitle>
           <IonButtons slot="end">
+            <OfflineBadge />
             <CloudSyncBadge />
           </IonButtons>
         </IonToolbar>
@@ -162,13 +168,24 @@ const Workout: React.FC = () => {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                   >
-                    <iframe
-                      src={exercise.videoUrl}
-                      title={`${exercise.name} video tutorial`}
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                    />
+                    {isVideoUnavailable ? (
+                      <div className="offline-video-fallback">
+                        <img src={exercise.imageUrl} alt={exercise.name} />
+                        <div className="offline-video-message">
+                          <IonIcon icon={cloudOfflineOutline} />
+                          <h3>{t('workout.videoUnavailableTitle')}</h3>
+                          <p>{t('workout.videoUnavailableDescription')}</p>
+                        </div>
+                      </div>
+                    ) : (
+                      <iframe
+                        src={exercise.videoUrl}
+                        title={`${exercise.name} video tutorial`}
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      />
+                    )}
                   </motion.div>
                 )}
               </AnimatePresence>
